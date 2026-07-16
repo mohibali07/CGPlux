@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import MagneticCursor from "@/components/MagneticCursor";
 import LenisScroller from "@/components/LenisScroller";
 import { getSiteSettings } from "@/lib/sanity";
 import "../globals.css";
@@ -36,10 +35,9 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#000000] cursor-none" suppressHydrationWarning>
+      <body className="bg-[#000000]" suppressHydrationWarning>
         <div className="noise-overlay" aria-hidden="true" />
         <LenisScroller />
-        <MagneticCursor />
         <div className="mx-auto w-full max-w-[1600px] min-h-screen flex flex-col relative bg-brand-dark">
           <div className="bg-grid absolute inset-0 z-0 pointer-events-none" aria-hidden="true" />
           <Header />

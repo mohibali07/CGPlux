@@ -13,49 +13,26 @@ export default function MagneticCursor() {
     const follower = followerRef.current;
     if (!cursor || !follower) return;
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
-    let followerX = 0;
-    let followerY = 0;
+    // quickTo is highly optimized for mouse followers in GSAP 3
+    const setCursorX = gsap.quickTo(cursor, "x", { duration: 0, ease: "none" });
+    const setCursorY = gsap.quickTo(cursor, "y", { duration: 0, ease: "none" });
+    
+    const setFollowerX = gsap.quickTo(follower, "x", { duration: 0.15, ease: "power3.out" });
+    const setFollowerY = gsap.quickTo(follower, "y", { duration: 0.15, ease: "power3.out" });
 
     const onMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      setCursorX(e.clientX);
+      setCursorY(e.clientY);
+      setFollowerX(e.clientX);
+      setFollowerY(e.clientY);
 
-      // Handle magnetic pull
       const target = e.target as HTMLElement;
-      const isMagnetic = target.closest("a, button, .magnetic");
+      const isInteractable = target.closest("a, button, .magnetic, input, textarea");
       
-      if (isMagnetic) {
-        setIsHovering(true);
-        const rect = isMagnetic.getBoundingClientRect();
-        // Magnet center
-        mouseX = rect.left + rect.width / 2;
-        mouseY = rect.top + rect.height / 2;
-      } else {
-        setIsHovering(false);
-      }
-    };
-
-    const render = () => {
-      // Lerp cursor (instant)
-      cursorX = mouseX;
-      cursorY = mouseY;
-      
-      // Lerp follower (snappier)
-      followerX += (mouseX - followerX) * 0.25;
-      followerY += (mouseY - followerY) * 0.25;
-
-      gsap.set(cursor, { x: cursorX, y: cursorY });
-      gsap.set(follower, { x: followerX, y: followerY });
-
-      requestAnimationFrame(render);
+      setIsHovering(!!isInteractable);
     };
 
     window.addEventListener("mousemove", onMouseMove);
-    requestAnimationFrame(render);
 
     return () => {
       window.removeEventListener("mousemove", onMouseMove);
@@ -74,15 +51,10 @@ export default function MagneticCursor() {
         ref={followerRef}
         className={`fixed top-0 left-0 rounded-full pointer-events-none z-[99] transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 flex items-center justify-center ${
           isHovering 
-            ? "w-16 h-16 bg-white/10 backdrop-blur-md border border-white/20" 
+            ? "w-12 h-12 bg-white/10 backdrop-blur-md border border-white/30" 
             : "w-8 h-8 border border-white/40"
         }`}
       >
-        {isHovering && (
-          <span className="text-[8px] uppercase tracking-widest text-white font-mono opacity-80">
-            Click
-          </span>
-        )}
       </div>
     </>
   );

@@ -55,8 +55,19 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
       const cards = gridRef.current.querySelectorAll(".portfolio-card");
       gsap.fromTo(
         cards,
-        { y: 40, opacity: 0, scale: 0.95 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: "power3.out" }
+        { y: 80, opacity: 0, rotateX: 15, transformPerspective: 800 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          rotateX: 0, 
+          duration: 1.2, 
+          stagger: 0.1, 
+          ease: "expo.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 85%",
+          }
+        }
       );
     }
   }, [activeFilter]);
