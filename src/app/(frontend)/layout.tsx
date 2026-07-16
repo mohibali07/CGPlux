@@ -27,7 +27,7 @@ export default async function RootLayout({
   const settings = await getSiteSettings().catch(() => null);
 
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} antialiased`}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -36,11 +36,11 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full bg-[#000000] cursor-none" suppressHydrationWarning>
+      <body className="bg-[#000000] cursor-none" suppressHydrationWarning>
         <div className="noise-overlay" aria-hidden="true" />
         <LenisScroller />
         <MagneticCursor />
-        <div className="mx-auto w-full max-w-[1600px] min-h-screen flex flex-col relative bg-brand-dark overflow-x-hidden">
+        <div className="mx-auto w-full max-w-[1600px] min-h-screen flex flex-col relative bg-brand-dark">
           <div className="bg-grid absolute inset-0 z-0 pointer-events-none" aria-hidden="true" />
           <Header />
           <main id="top" className="relative z-10 flex-1">

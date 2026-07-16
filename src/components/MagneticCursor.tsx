@@ -40,13 +40,13 @@ export default function MagneticCursor() {
     };
 
     const render = () => {
-      // Lerp cursor (fast)
-      cursorX += (mouseX - cursorX) * 0.5;
-      cursorY += (mouseY - cursorY) * 0.5;
+      // Lerp cursor (instant)
+      cursorX = mouseX;
+      cursorY = mouseY;
       
-      // Lerp follower (slow, springy)
-      followerX += (mouseX - followerX) * 0.15;
-      followerY += (mouseY - followerY) * 0.15;
+      // Lerp follower (snappier)
+      followerX += (mouseX - followerX) * 0.25;
+      followerY += (mouseY - followerY) * 0.25;
 
       gsap.set(cursor, { x: cursorX, y: cursorY });
       gsap.set(follower, { x: followerX, y: followerY });
