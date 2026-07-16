@@ -39,7 +39,7 @@ export default function Footer({ instagramUrl, behanceUrl, linkedinUrl }: Footer
   return (
     <footer ref={footerRef} className="py-10 pb-16 border-t border-slate-800/90 opacity-100">
 
-      <div className="w-full max-w-[1920px] mx-auto px-6">
+      <div className="w-full px-8 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Brand */}
           <div>
@@ -110,7 +110,7 @@ export default function Footer({ instagramUrl, behanceUrl, linkedinUrl }: Footer
 
         <div className="mt-10 pt-6 border-t border-slate-800/90 flex justify-between items-center max-md:flex-col max-md:gap-4">
           <div className="font-mono text-xs uppercase tracking-[0.16em] text-white/62">
-            &copy; {new Date().getFullYear()} Kanvas Digital. All rights reserved.
+            &copy; {new Date().getFullYear()} CGplux Studios. All rights reserved.
           </div>
           <div className="flex gap-4">
             <a href="#" className="font-mono text-xs uppercase tracking-[0.14em] text-white/40 hover:text-white/80 transition-colors duration-300 no-underline">Terms</a>

@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kanvas Digital",
+  title: "CGplux Studios",
   description:
     "Atmospheric, cinematic, and grid-aligned dark mode system for creative studios.",
 };
@@ -38,7 +38,7 @@ export default async function RootLayout({
       <body className="bg-[#000000]" suppressHydrationWarning>
         <div className="noise-overlay" aria-hidden="true" />
         <LenisScroller />
-        <div className="mx-auto w-full max-w-[1600px] min-h-screen flex flex-col relative bg-brand-dark">
+        <div className="mx-auto w-full min-h-screen flex flex-col relative bg-brand-dark">
           <div className="bg-grid absolute inset-0 z-0 pointer-events-none" aria-hidden="true" />
           <Header />
           <main id="top" className="relative z-10 flex-1">

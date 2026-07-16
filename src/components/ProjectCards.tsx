@@ -74,7 +74,7 @@ export default function ProjectCards({ projects }: ProjectCardsProps) {
   const fallbackCards = [
     { title: "Aether Studio", meta: "Brand / Web / Motion" },
     { title: "Noir Systems", meta: "Design / UI / 3D" },
-    { title: "Kanvas Lab", meta: "Prototype / Dev / QA" },
+    { title: "CGplux Lab", meta: "Prototype / Dev / QA" },
   ];
 
   return (

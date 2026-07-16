@@ -3,8 +3,8 @@ import TeamGrid from "@/components/TeamGrid";
 import { getTeamMembers } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Our Team | Kanvas Digital",
-  description: "Meet the team behind Kanvas Digital.",
+  title: "Our Team | CGplux Studios",
+  description: "Meet the team behind CGplux Studios.",
 };
 
 export default async function OurTeamPage() {

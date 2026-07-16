@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact | Kanvas Digital",
-  description: "Get in touch with Kanvas Digital.",
+  title: "Contact | CGplux Studios",
+  description: "Get in touch with CGplux Studios.",
 };
 
 export default function ContactPage() {
@@ -37,8 +37,8 @@ export default function ContactPage() {
               <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-accent/80 mb-2">
                 Email Us
               </div>
-              <a href="mailto:info@kanvasdigital.com" className="text-xl font-bold tracking-tight no-underline hover:text-brand-accent transition-colors duration-300">
-                info@kanvasdigital.com
+              <a href="mailto:info@CGpluxdigital.com" className="text-xl font-bold tracking-tight no-underline hover:text-brand-accent transition-colors duration-300">
+                info@CGpluxdigital.com
               </a>
             </div>
 

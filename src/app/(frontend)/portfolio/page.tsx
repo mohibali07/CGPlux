@@ -3,8 +3,8 @@ import PortfolioGrid from "@/components/PortfolioGrid";
 import { getPortfolioItems } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Portfolio | Kanvas Digital",
-  description: "Selected work from Kanvas Digital studios.",
+  title: "Portfolio | CGplux Studios",
+  description: "Selected work from CGplux Studios studios.",
 };
 
 export default async function PortfolioPage() {

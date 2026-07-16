@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
+import ColorBends from "./ColorBends";
 
 interface HeroProps {
   eyebrow?: string;
@@ -18,7 +19,7 @@ export default function Hero({
   eyebrow = "Atmospheric / Cinematic / Grid-Aligned",
   title = "Crafting digital worlds",
   titleStroke = "with precision",
-  subtitle = "Kanvas Digital is a dark-mode system for creative studios: monospace metadata, sharp geometry, glass depth, and heavy interactions.",
+  subtitle = "CGplux Studios is a dark-mode system for creative studios: monospace metadata, sharp geometry, glass depth, and heavy interactions.",
   activeClients = "12",
   pipeline = "24/7",
   nextUpdate = "Aug 01",
@@ -88,13 +89,27 @@ export default function Hero({
 
   return (
     <section ref={sectionRef} className="relative w-full h-screen min-h-[800px] flex items-center overflow-hidden border-b border-white/[0.05]">
-      {/* Elegant Atmospheric Background */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-[#020202]">
-        <div className="hero-parallax-bg absolute -top-[20%] -right-[10%] w-[70vw] h-[70vw] bg-brand-accent/[0.08] rounded-full blur-[120px] mix-blend-screen opacity-60" />
-        <div className="hero-parallax-bg absolute bottom-[10%] -left-[10%] w-[50vw] h-[50vw] bg-white/[0.03] rounded-full blur-[100px] mix-blend-screen opacity-40" />
+      {/* Kinetic WebGL Background */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-black opacity-90 mix-blend-screen">
+        <ColorBends
+          colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
+          rotation={90}
+          speed={0.2}
+          scale={3.2}
+          frequency={3}
+          warpStrength={1}
+          mouseInfluence={0.85}
+          noise={0.15}
+          parallax={0.5}
+          iterations={1}
+          intensity={1.5}
+          bandWidth={6}
+          transparent={true}
+          autoRotate={0}
+        />
       </div>
 
-      <div ref={textContainerRef} className="relative z-10 w-full max-w-[1600px] mx-auto px-6 lg:px-16 pt-20">
+      <div ref={textContainerRef} className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 pt-20">
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12 lg:gap-24 w-full">
           
           {/* Main Title Left */}

@@ -23,7 +23,7 @@ export default function TestimonialsSlider({ testimonials }: TestimonialsSliderP
     {
       _id: "1",
       quote:
-        "\u201cKanvas delivered a system that feels cinematic but behaves like engineering: consistent, fast, and sharply aligned.\u201d",
+        "\u201cCGplux delivered a system that feels cinematic but behaves like engineering: consistent, fast, and sharply aligned.\u201d",
       author: "Mira H.",
       role: "CTO",
     },
@@ -129,7 +129,7 @@ export default function TestimonialsSlider({ testimonials }: TestimonialsSliderP
 
   return (
     <section ref={sectionRef} className="py-[6rem]">
-      <div ref={headerRef} className="w-full max-w-[1920px] mx-auto px-6 flex flex-col items-center text-center mb-7">
+      <div ref={headerRef} className="w-full max-w-[1400px] mx-auto px-6 flex flex-col items-center text-center mb-7">
         <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 opacity-0">
           Testimonials
         </div>
@@ -143,7 +143,7 @@ export default function TestimonialsSlider({ testimonials }: TestimonialsSliderP
 
       <div
         ref={containerRef}
-        className="w-full max-w-[1920px] mx-auto px-6 grid grid-cols-[240px_1fr_120px] gap-5 items-center border border-slate-800 bg-white/[0.01] p-[18px] opacity-0 max-[1100px]:grid-cols-[220px_1fr] max-[760px]:grid-cols-1 max-[760px]:[&>div:last-child]:hidden"
+        className="w-full max-w-[1400px] mx-auto px-6 grid grid-cols-[240px_1fr_120px] gap-5 items-center border border-slate-800 bg-white/[0.01] p-[18px] opacity-0 max-[1100px]:grid-cols-[220px_1fr] max-[760px]:grid-cols-1 max-[760px]:[&>div:last-child]:hidden"
       >
         {/* Avatar triggers */}
         <div className="flex flex-col gap-2.5 max-[760px]:flex-row max-[760px]:gap-2">

@@ -64,7 +64,7 @@ export default function ClientsSection({ clients, partners }: ClientsSectionProp
 
   return (
     <section ref={ref} className="py-[6rem] border-t border-slate-800/50">
-      <div className="w-full max-w-[1920px] mx-auto px-6">
+      <div className="w-full max-w-[1400px] mx-auto px-6">
         {/* Clients */}
         <div id="clients" className="mb-16">
           <div className="text-center mb-10">

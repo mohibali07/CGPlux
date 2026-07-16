@@ -3,8 +3,8 @@ import BlogList from "@/components/BlogList";
 import { getBlogPosts } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Blog | Kanvas Digital",
-  description: "Insights, news, and tutorials from Kanvas Digital.",
+  title: "Blog | CGplux Studios",
+  description: "Insights, news, and tutorials from CGplux Studios.",
 };
 
 export default async function BlogPage() {

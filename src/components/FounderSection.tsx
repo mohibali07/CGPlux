@@ -48,7 +48,7 @@ export default function FounderSection({ name, role, designation, bio, photo, in
 
   return (
     <section ref={ref} className="py-[6rem] border-t border-slate-800/50">
-      <div className="w-full max-w-[1920px] mx-auto px-6 grid grid-cols-[0.8fr_1.2fr] gap-16 items-center max-lg:grid-cols-1">
+      <div className="w-full max-w-[1400px] mx-auto px-6 grid grid-cols-[0.8fr_1.2fr] gap-16 items-center max-lg:grid-cols-1">
         <div className="founder-animate opacity-0 flex justify-center">
           <div className="relative w-[280px] h-[340px] border border-slate-800 overflow-hidden bg-gradient-to-br from-brand-accent/[0.06] to-transparent group">
             <div

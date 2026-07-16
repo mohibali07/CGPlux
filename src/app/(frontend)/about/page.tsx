@@ -6,8 +6,8 @@ import ContactCTA from "@/components/ContactCTA";
 import { getSiteSettings, getFounderProfile, getClients } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "About Us | Kanvas Digital",
-  description: "Learn more about Kanvas Digital, our founders, and the clients we serve.",
+  title: "About Us | CGplux Studios",
+  description: "Learn more about CGplux Studios, our founders, and the clients we serve.",
 };
 
 export default async function AboutPage() {
@@ -27,7 +27,7 @@ export default async function AboutPage() {
           Who We Are
         </div>
         <h1 className="font-extrabold tracking-tight text-[48px] max-md:text-[36px] text-white">
-          About Kanvas Digital
+          About CGplux Studios
         </h1>
       </div>
 

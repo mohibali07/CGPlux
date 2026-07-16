@@ -3,8 +3,8 @@ import ServiceGrid from "@/components/ServiceGrid";
 import { getServices } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Services | Kanvas Digital",
-  description: "What we build at Kanvas Digital.",
+  title: "Services | CGplux Studios",
+  description: "What we build at CGplux Studios.",
 };
 
 export default async function ServicesPage() {

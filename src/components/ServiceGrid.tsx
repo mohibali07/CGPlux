@@ -86,7 +86,7 @@ export default function ServiceGrid({ services }: ServiceGridProps) {
 
   return (
     <section ref={sectionRef} className="py-[6rem]">
-      <div ref={headerRef} className="w-full max-w-[1920px] mx-auto px-6 flex items-end justify-between gap-8 mb-10 max-md:flex-col max-md:items-start">
+      <div ref={headerRef} className="w-full max-w-[1400px] mx-auto px-6 flex items-end justify-between gap-8 mb-10 max-md:flex-col max-md:items-start">
         <div className="opacity-0">
           <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">
             Our Services
@@ -97,7 +97,7 @@ export default function ServiceGrid({ services }: ServiceGridProps) {
         </div>
       </div>
 
-      <div className="w-full max-w-[1920px] mx-auto px-6 border border-slate-800 flex flex-col lg:flex-row bg-white/[0.01]">
+      <div className="w-full max-w-[1400px] mx-auto px-6 border border-slate-800 flex flex-col lg:flex-row bg-white/[0.01]">
         {/* Left List */}
         <div className="lg:w-[35%] border-b lg:border-b-0 lg:border-r border-slate-800 divide-y divide-slate-800">
           {items.map((service, idx) => {

@@ -40,11 +40,11 @@ export default function ContactCTA({ ctaTitle, ctaSubtitle, ctaEmail }: ContactC
     return () => ctx.revert();
   }, []);
 
-  const email = ctaEmail || "hello@kanvasdigital.com";
+  const email = ctaEmail || "hello@CGpluxdigital.com";
 
   return (
     <section ref={sectionRef} className="pt-[30px] pb-[6rem]">
-      <div className="w-full max-w-[1920px] mx-auto px-6">
+      <div className="w-full max-w-[1400px] mx-auto px-6">
         <div
           ref={cardRef}
           className="border border-slate-800 bg-gradient-to-br from-white/[0.02] to-white/[0.01] p-5 flex items-center justify-between gap-5 relative overflow-hidden max-md:flex-col max-md:items-start"

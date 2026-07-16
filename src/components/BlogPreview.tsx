@@ -80,7 +80,7 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
 
   return (
     <section ref={ref} className="py-[6rem] border-t border-slate-800/50">
-      <div className="w-full max-w-[1920px] mx-auto px-6">
+      <div className="w-full max-w-[1400px] mx-auto px-6">
         <div className="flex items-end justify-between gap-8 mb-10 max-md:flex-col max-md:items-start">
           <div>
             <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">

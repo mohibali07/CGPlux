@@ -47,7 +47,7 @@ export default function BlogList({ posts }: BlogListProps) {
       _id: "1",
       title: "Asia's First Documented All-White RTX 5090 Build",
       slug: { current: "asias-first-all-white-rtx-5090-build" },
-      excerpt: "The ultimate CG workstation by Kanvas Digital - built for cinematic production and 3D rendering.",
+      excerpt: "The ultimate CG workstation by CGplux Studios - built for cinematic production and 3D rendering.",
       category: "Blog",
       publishedAt: "2025-05-28",
     },

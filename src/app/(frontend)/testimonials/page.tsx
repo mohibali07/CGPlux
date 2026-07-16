@@ -3,8 +3,8 @@ import TestimonialsSlider from "@/components/TestimonialsSlider";
 import { getTestimonials } from "@/lib/sanity";
 
 export const metadata: Metadata = {
-  title: "Testimonials | Kanvas Digital",
-  description: "What our clients say about working with Kanvas Digital.",
+  title: "Testimonials | CGplux Studios",
+  description: "What our clients say about working with CGplux Studios.",
 };
 
 export default async function TestimonialsPage() {
