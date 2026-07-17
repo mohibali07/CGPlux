@@ -50,6 +50,7 @@ export default function BlogList({ posts }: BlogListProps) {
       excerpt: "The ultimate CG workstation by CGplux Studios - built for cinematic production and 3D rendering.",
       category: "Blog",
       publishedAt: "2025-05-28",
+      image: undefined,
     },
   ];
 

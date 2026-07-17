@@ -42,12 +42,12 @@ export default function TeamGrid({ members }: TeamGridProps) {
   }, []);
 
   const fallback = [
-    { name: "Syed Ali Murtaza Jaffery", role: "CEO / Founder", instagram: "#" },
-    { name: "Haseeb Haider", role: "Creative Director", instagram: "#" },
-    { name: "Syed Yawer Abbas Jaffery", role: "Finance Manager", instagram: "#" },
-    { name: "Ozaib", role: "Sales Manager", instagram: "#" },
-    { name: "Syeda Aemal", role: "Social Media Manager", instagram: "#" },
-    { name: "Eiman Zehra", role: "Assistant Manager", instagram: "#" },
+    { name: "Syed Ali Murtaza Jaffery", role: "CEO / Founder", instagram: "#", photo: undefined },
+    { name: "Haseeb Haider", role: "Creative Director", instagram: "#", photo: undefined },
+    { name: "Syed Yawer Abbas Jaffery", role: "Finance Manager", instagram: "#", photo: undefined },
+    { name: "Ozaib", role: "Sales Manager", instagram: "#", photo: undefined },
+    { name: "Syeda Aemal", role: "Social Media Manager", instagram: "#", photo: undefined },
+    { name: "Eiman Zehra", role: "Assistant Manager", instagram: "#", photo: undefined },
   ];
 
   const items = members.length > 0
