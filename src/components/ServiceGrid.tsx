@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface Service {
@@ -21,9 +21,7 @@ interface ServiceGridProps {
 export default function ServiceGrid({ services }: ServiceGridProps) {
   const [activeIdx, setActiveIdx] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLImageElement | null>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   const fallback = [
     { title: "Software Development", tags: ["Custom Apps", "Enterprise", "APIs"], image: "/images/services/software_development.png" },
@@ -39,163 +37,116 @@ export default function ServiceGrid({ services }: ServiceGridProps) {
       ? services
       : fallback.map((f, i) => ({ _id: String(i), title: f.title, tags: f.tags, image: f.image }));
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      if (headerRef.current) {
-        gsap.fromTo(
-          headerRef.current.children,
-          { y: 40, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: headerRef.current,
-              start: "top 85%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
   // Animation on activeIdx change
   useEffect(() => {
     if (imageRef.current) {
       gsap.fromTo(
         imageRef.current,
-        { scale: 1.05, opacity: 0.2 },
-        { scale: 1, opacity: 0.6, duration: 0.8, ease: "power2.out" }
-      );
-    }
-    
-    if (textRef.current) {
-      const children = textRef.current.children;
-      gsap.fromTo(
-        children,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: "power2.out" }
+        { scale: 1.05, opacity: 0, filter: "blur(10px)" },
+        { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.8, ease: "power2.out" }
       );
     }
   }, [activeIdx]);
 
   return (
-    <section ref={sectionRef} className="py-[6rem]">
-      <div ref={headerRef} className="w-full max-w-[1400px] mx-auto px-6 flex items-end justify-between gap-8 mb-10 max-md:flex-col max-md:items-start">
-        <div className="opacity-0">
-          <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">
-            Our Services
+    <section ref={sectionRef} className="py-24 md:py-32 bg-brand-dark">
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 lg:gap-24">
+        
+        {/* Left Typography List */}
+        <div className="lg:w-1/2 flex flex-col justify-center">
+          <div className="mb-16 md:mb-24">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-6 flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-brand-accent"></span>
+              Our Services
+            </div>
+            <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white">
+              What We Do Best.
+            </h2>
           </div>
-          <h2 className="font-extrabold tracking-tight text-[48px] max-md:text-[36px]">
-            What We Do Best
-          </h2>
-        </div>
-      </div>
 
-      <div className="w-full max-w-[1400px] mx-auto px-6 border border-slate-800 flex flex-col lg:flex-row bg-white/[0.01]">
-        {/* Left List */}
-        <div className="lg:w-[35%] border-b lg:border-b-0 lg:border-r border-slate-800 divide-y divide-slate-800">
-          {items.map((service, idx) => {
-            const isActive = idx === activeIdx;
-            return (
-              <button
-                key={service._id}
-                onMouseEnter={() => setActiveIdx(idx)}
-                onClick={() => setActiveIdx(idx)}
-                className={`w-full flex items-center justify-between px-7 py-5 min-h-[72px] text-left transition-colors duration-400 group cursor-pointer ${
-                  isActive ? "bg-brand-accent/[0.04]" : "hover:bg-white/[0.02]"
-                }`}
-              >
-                <div className="flex items-center gap-5">
-                  <span
-                    className={`text-[10px] tabular-nums font-mono tracking-[0.15em] transition-colors duration-300 ${
-                      isActive ? "text-brand-accent" : "text-white/40"
-                    }`}
+          <div className="flex flex-col gap-4 md:gap-6">
+            {items.map((service, idx) => {
+              const isActive = idx === activeIdx;
+              return (
+                <div key={service._id} className="flex flex-col border-b border-white/[0.05] pb-4 md:pb-6 last:border-0">
+                  <button
+                    onMouseEnter={() => setActiveIdx(idx)}
+                    onClick={() => setActiveIdx(idx)}
+                    className="group flex items-center gap-6 md:gap-8 text-left cursor-pointer w-full"
                   >
-                    0{idx + 1}
-                  </span>
-                  <span
-                    className={`text-[16px] font-medium tracking-tight transition-colors duration-300 ${
-                      isActive ? "text-white" : "text-white/60 group-hover:text-white/90"
-                    }`}
-                  >
-                    {service.title}
-                  </span>
-                </div>
-                {isActive && (
-                  <div className="w-2 h-2 rounded-full bg-brand-accent shadow-[0_0_10px_rgba(125,211,252,0.5)]"></div>
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Right Panel */}
-        <div className="flex-1 relative overflow-hidden min-h-[400px] lg:min-h-[600px] group/panel bg-brand-dark">
-          {items[activeIdx].image && (
-            <div className="absolute inset-0">
-              <Image
-                ref={(el) => { imageRef.current = el; }}
-                src={
-                  typeof items[activeIdx].image === "string"
-                    ? items[activeIdx].image
-                    : urlFor(items[activeIdx].image).width(1200).height(800).url()
-                }
-                alt={items[activeIdx].title}
-                fill
-                sizes="(max-width: 768px) 100vw, 60vw"
-                className="object-cover opacity-40 grayscale group-hover/panel:grayscale-0 group-hover/panel:opacity-90 transition-all duration-700 ease-out"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-brand-dark/95 via-brand-dark/70 to-brand-dark/30 group-hover/panel:from-brand-dark/70 group-hover/panel:via-brand-dark/30 group-hover/panel:to-transparent transition-colors duration-700 ease-out" />
-            </div>
-          )}
-
-          <div className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between z-10 pointer-events-none">
-            <div className="flex items-start justify-between">
-              <div className="w-14 h-14 rounded-full border border-white/[0.1] flex items-center justify-center bg-brand-dark/50 backdrop-blur-sm">
-                <span className="text-white/50 text-[10px] font-mono tracking-[0.2em] uppercase">0{activeIdx + 1}</span>
-              </div>
-              <span
-                className="font-extrabold text-white/[0.03] select-none"
-                style={{ fontSize: "clamp(80px, 12vw, 160px)", lineHeight: 1, letterSpacing: "-0.05em" }}
-              >
-                0{activeIdx + 1}
-              </span>
-            </div>
-
-            <div ref={textRef} className="max-w-[500px] pointer-events-auto">
-              <p className="text-[11px] text-brand-accent/80 uppercase tracking-[0.28em] font-mono mb-4">
-                0{activeIdx + 1} / 0{items.length}
-              </p>
-              <h3 className="text-white font-extrabold tracking-tight mb-6" style={{ fontSize: "clamp(32px, 4vw, 56px)", lineHeight: 1.1 }}>
-                {items[activeIdx].title}
-              </h3>
-              {items[activeIdx].tags && (
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {items[activeIdx].tags?.map((tag) => (
-                    <span key={tag} className="px-3 py-1.5 border border-white/10 rounded-sm text-[12px] text-white/70 bg-white/[0.02]">
-                      {tag}
+                    <span
+                      className={`font-mono text-sm tracking-[0.2em] transition-colors duration-500 ${
+                        isActive ? "text-brand-accent" : "text-white/20 group-hover:text-white/40"
+                      }`}
+                    >
+                      0{idx + 1}
                     </span>
-                  ))}
+                    <h3
+                      className={`font-heading text-3xl md:text-[42px] font-bold tracking-tight transition-all duration-500 ${
+                        isActive ? "text-white translate-x-2 md:translate-x-4" : "text-white/20 group-hover:text-white/50"
+                      }`}
+                    >
+                      {service.title}
+                    </h3>
+                  </button>
+                  
+                  {/* Expanded Content (Tags & CTA) */}
+                  <div
+                    className={`pl-14 md:pl-[4.5rem] overflow-hidden transition-all duration-500 ease-in-out ${
+                      isActive ? "max-h-[200px] mt-6 md:mt-8 opacity-100" : "max-h-0 mt-0 opacity-0"
+                    }`}
+                  >
+                    {service.tags && (
+                      <div className="flex flex-wrap gap-3 mb-6 md:mb-8">
+                        {service.tags.map((tag) => (
+                          <span key={tag} className="px-4 py-1.5 border border-white/10 rounded-full text-[10px] md:text-[11px] font-mono tracking-[0.15em] uppercase text-white/60 bg-white/[0.02]">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <button className="inline-flex items-center gap-3 text-xs md:text-sm font-mono uppercase tracking-[0.2em] text-white/80 hover:text-brand-accent transition-colors duration-300">
+                      Explore Service <span className="text-brand-accent text-lg leading-none">&rarr;</span>
+                    </button>
+                  </div>
                 </div>
-              )}
-              <button className="group inline-flex items-center gap-2.5 text-[13px] text-brand-accent hover:text-white transition-colors duration-300">
-                <span className="border-b border-brand-accent/30 group-hover:border-white/50 pb-1 transition-colors">
-                  Explore Service
-                </span>
-                <span className="transform transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-                  &nearr;
-                </span>
-              </button>
-            </div>
+              );
+            })}
           </div>
         </div>
+
+        {/* Right Visual Panel */}
+        <div className="lg:w-1/2 flex items-center justify-center min-h-[500px] lg:min-h-[700px]">
+          <div className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-full max-h-[850px] overflow-hidden bg-black/50 border border-white/[0.08]">
+            {items[activeIdx].image ? (
+              <div ref={imageRef} className="absolute inset-0 w-full h-full">
+                <Image
+                  src={
+                    typeof items[activeIdx].image === "string"
+                      ? items[activeIdx].image
+                      : urlFor(items[activeIdx].image).width(1200).height(1600).url()
+                  }
+                  alt={items[activeIdx].title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="object-cover grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-700 ease-out"
+                  priority
+                />
+              </div>
+            ) : (
+              <div ref={imageRef} className="absolute inset-0 w-full h-full flex items-center justify-center">
+                 <span className="font-mono text-xs text-white/20 uppercase tracking-[0.2em]">No Media Found</span>
+              </div>
+            )}
+            
+            {/* Minimal Decorative Corner Accents */}
+            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30 z-10"></div>
+            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/30 z-10"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/30 z-10"></div>
+            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30 z-10"></div>
+          </div>
+        </div>
+        
       </div>
     </section>
   );

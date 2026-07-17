@@ -66,7 +66,7 @@ export default function TeamGrid({ members }: TeamGridProps) {
               className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
               style={{
                 background:
-                  "radial-gradient(300px 300px at 50% 40%, rgba(125,211,252,0.08), rgba(0,0,0,0) 60%)",
+                  "radial-gradient(300px 300px at 50% 40%, rgba(56,199,192,0.08), rgba(0,0,0,0) 60%)",
               }}
             />
             <div className="absolute inset-0">

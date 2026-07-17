@@ -2,9 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { gsap } from "@/lib/gsap";
-import { urlFor } from "@/lib/sanity";
 
 interface BlogPost {
   _id: string;
@@ -51,7 +49,7 @@ function formatDate(dateStr?: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
-    day: "numeric",
+    day: "2-digit",
   });
 }
 
@@ -62,14 +60,18 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".blog-card",
-        { y: 50, opacity: 0 },
+        { y: 30, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
+          duration: 1,
           stagger: 0.15,
           ease: "power3.out",
-          scrollTrigger: { trigger: ref.current, start: "top 80%" },
+          scrollTrigger: { 
+            trigger: ref.current, 
+            start: "top 80%",
+            toggleActions: "play none none none" 
+          },
         }
       );
     }, ref);
@@ -79,59 +81,70 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
   const displayPosts = posts && posts.length > 0 ? posts.slice(0, 3) : fallbackPosts;
 
   return (
-    <section ref={ref} className="py-[6rem] border-t border-slate-800/50">
-      <div className="w-full max-w-[1400px] mx-auto px-6">
-        <div className="flex items-end justify-between gap-8 mb-10 max-md:flex-col max-md:items-start">
+    <section ref={ref} className="py-24 md:py-32 bg-brand-dark">
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
+        
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8 mb-16 md:mb-24">
           <div>
-            <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-6 flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-brand-accent"></span>
               From the Blog
             </div>
-            <h2 className="font-extrabold tracking-tight text-[40px]">Latest Insights</h2>
+            <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white">
+              Latest Insights.
+            </h2>
           </div>
           <Link
             href="/blog"
-            className="text-brand-accent/95 no-underline font-mono text-xs uppercase tracking-[0.14em] hover:underline transition-all duration-300"
+            className="group flex items-center gap-3 text-sm font-mono uppercase tracking-[0.2em] text-white/80 hover:text-brand-accent transition-colors duration-300 md:mb-4"
           >
-            View All &rarr;
+            View All <span className="text-brand-accent text-lg leading-none transform transition-transform group-hover:translate-x-1">&rarr;</span>
           </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-px max-lg:grid-cols-2 max-md:grid-cols-1">
+        {/* Minimal Typographic Rows */}
+        <div className="flex flex-col border-t border-white/[0.05]">
           {displayPosts.map((post) => (
             <Link
               key={post._id}
               href={post.slug ? `/blog/${post.slug.current}` : "#"}
-              className="blog-card opacity-0 border border-slate-800 bg-white/[0.01] overflow-hidden hover:bg-white/[0.03] transition-all duration-500 group cursor-pointer no-underline"
+              className="blog-card opacity-0 group flex flex-col md:flex-row md:items-center justify-between gap-6 py-8 md:py-12 border-b border-white/[0.05] hover:bg-white/[0.02] px-4 -mx-4 transition-all duration-500 no-underline cursor-pointer"
             >
-              {/* Post image */}
-              {post.image && (
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={urlFor(post.image).width(600).height(340).url()}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                  />
-                </div>
-              )}
-              <div className="p-6">
-                <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand-accent/80 mb-3">
-                  {post.category}
-                </div>
-                <h3 className="font-extrabold tracking-tight text-lg mb-3 group-hover:text-brand-accent/90 transition-colors duration-300 text-white">
-                  {post.title}
-                </h3>
-                {post.excerpt && (
-                  <p className="text-white/62 text-sm leading-relaxed mb-4">{post.excerpt}</p>
-                )}
-                <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-white/40">
+              
+              <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 lg:gap-32 flex-1">
+                {/* Date */}
+                <div className="font-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-white/30 w-32 shrink-0 group-hover:text-brand-accent transition-colors duration-500">
                   {formatDate(post.publishedAt)}
                 </div>
+                
+                {/* Title & Category */}
+                <div className="flex flex-col gap-3 md:gap-4">
+                   <h3 className="font-heading text-2xl md:text-[32px] lg:text-[40px] font-bold tracking-tight text-white/70 group-hover:text-white transition-all duration-500 transform group-hover:translate-x-2">
+                     {post.title}
+                   </h3>
+                   {post.category && (
+                     <div className="flex items-center gap-3">
+                       <span className="w-4 h-[1px] bg-white/20 group-hover:bg-brand-accent transition-colors"></span>
+                       <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-brand-accent transition-colors">
+                         {post.category}
+                       </span>
+                     </div>
+                   )}
+                </div>
               </div>
+
+              {/* Hover Arrow Indicator */}
+              <div className="hidden md:flex items-center shrink-0">
+                 <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:bg-brand-accent group-hover:text-brand-dark group-hover:border-brand-accent transition-all duration-500 transform group-hover:-rotate-45">
+                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                 </div>
+              </div>
+
             </Link>
           ))}
         </div>
+        
       </div>
     </section>
   );

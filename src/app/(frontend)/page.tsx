@@ -39,9 +39,9 @@ export default async function Home() {
         title={settings?.heroTitle}
         titleStroke={settings?.heroTitleStroke}
         subtitle={settings?.heroSubtitle}
-        activeClients={settings?.activeClients}
-        pipeline={settings?.pipeline}
-        nextUpdate={settings?.nextUpdate}
+        projectsDelivered="150+"
+        techStack="Web • Mobile • AI"
+        successRate="100%"
       />
       <AboutSection
         eyebrow={settings?.aboutEyebrow}

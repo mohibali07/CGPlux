@@ -140,7 +140,7 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
                 <div
                   className="absolute inset-0"
                   style={{
-                    background: `radial-gradient(600px 400px at ${30 + Math.random() * 40}% ${20 + Math.random() * 30}%, rgba(125,211,252,0.15), rgba(0,0,0,0) 60%), linear-gradient(135deg, rgba(148,163,184,0.1), rgba(11,13,17,0.3))`,
+                    background: `radial-gradient(600px 400px at ${30 + Math.random() * 40}% ${20 + Math.random() * 30}%, rgba(56,199,192,0.15), rgba(0,0,0,0) 60%), linear-gradient(135deg, rgba(148,163,184,0.1), rgba(11,13,17,0.3))`,
                     filter: "saturate(0.9) grayscale(0.2)",
                   }}
                 />
@@ -155,7 +155,7 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
               )}
               <div className="font-extrabold tracking-tight text-lg">{item.title}</div>
             </div>
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none shadow-[inset_0_0_80px_rgba(125,211,252,0.06)]" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none shadow-[inset_0_0_80px_rgba(56,199,192,0.06)]" />
           </div>
         ))}
       </div>

@@ -112,7 +112,7 @@ export default function ContactPage() {
               </div>
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2.5 h-[48px] px-8 rounded-sm font-mono text-xs uppercase tracking-[0.12em] border border-brand-accent/35 bg-brand-accent/12 text-brand-accent/98 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-accent/18 hover:shadow-[0_0_20px_rgba(125,211,252,0.15)] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 h-[48px] px-8 rounded-sm font-mono text-xs uppercase tracking-[0.12em] border border-brand-accent/35 bg-brand-accent/12 text-brand-accent/98 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-accent/18 hover:shadow-[0_0_20px_rgba(56,199,192,0.15)] cursor-pointer"
               >
                 Send Message
               </button>

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { gsap } from "@/lib/gsap";
 
 interface ContactCTAProps {
   ctaTitle?: string;
@@ -12,23 +12,23 @@ interface ContactCTAProps {
 
 export default function ContactCTA({ ctaTitle, ctaSubtitle, ctaEmail }: ContactCTAProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (cardRef.current) {
-        const children = cardRef.current.children;
+      if (contentRef.current) {
+        const children = contentRef.current.children;
         gsap.fromTo(
           children,
-          { y: 40, opacity: 0 },
+          { y: 30, opacity: 0 },
           {
             y: 0,
             opacity: 1,
-            duration: 0.8,
+            duration: 1,
             stagger: 0.2,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: cardRef.current,
+              trigger: contentRef.current,
               start: "top 85%",
               toggleActions: "play none none none",
             },
@@ -43,38 +43,41 @@ export default function ContactCTA({ ctaTitle, ctaSubtitle, ctaEmail }: ContactC
   const email = ctaEmail || "hello@CGpluxdigital.com";
 
   return (
-    <section ref={sectionRef} className="pt-[30px] pb-[6rem]">
-      <div className="w-full max-w-[1400px] mx-auto px-6">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-brand-dark">
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
         <div
-          ref={cardRef}
-          className="border border-slate-800 bg-gradient-to-br from-white/[0.02] to-white/[0.01] p-5 flex items-center justify-between gap-5 relative overflow-hidden max-md:flex-col max-md:items-start"
+          ref={contentRef}
+          className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-20 py-16 md:py-24 border-t border-b border-white/[0.05]"
         >
-          {/* Accent glow */}
-          <div className="absolute -top-20 -right-20 w-64 h-64 bg-brand-accent/[0.04] rounded-full blur-3xl pointer-events-none" />
-
-          <div className="opacity-0">
-            <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90">
+          {/* Left Text Content */}
+          <div className="opacity-0 flex-1">
+            <div className="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-6 flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-brand-accent"></span>
               Contact
             </div>
-            <h3 className="mt-2.5 mb-2 text-[28px] tracking-tight font-extrabold">
-              {ctaTitle || "Start a project"}
+            <h3 className="font-heading font-medium text-[48px] md:text-[80px] leading-[1.1] tracking-tight text-white mb-6">
+              {ctaTitle || "Start a project."}
             </h3>
-            <p className="m-0 text-white/72 leading-[1.7] max-w-[60ch]">
+            <p className="m-0 text-white/50 text-lg md:text-xl leading-[1.6] max-w-[500px]">
               {ctaSubtitle || "We'll respond with a deck and a plan—built on your grid, not generic templates."}
             </p>
           </div>
-          <div className="flex gap-3 flex-wrap opacity-0">
+
+          {/* Right Action Buttons */}
+          <div className="opacity-0 flex flex-col sm:flex-row gap-4 shrink-0 lg:pb-2">
             <Link
               href={`mailto:${email}`}
-              className="inline-flex items-center justify-center gap-2.5 h-[44px] px-4 rounded-sm font-mono text-xs uppercase tracking-[0.12em] no-underline border border-brand-accent/35 bg-brand-accent/12 text-brand-accent/98 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-accent/18 hover:shadow-[0_0_20px_rgba(125,211,252,0.15)]"
+              className="group relative inline-flex items-center justify-center gap-3 h-14 md:h-16 px-8 md:px-10 bg-white font-mono text-xs md:text-sm uppercase tracking-[0.2em] transition-all duration-500 overflow-hidden"
             >
-              Email Us
+              <span className="relative z-10 font-bold text-brand-dark group-hover:text-white transition-colors duration-500">Email Us</span>
+              <div className="absolute inset-0 bg-brand-accent transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
             </Link>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center gap-2.5 h-[44px] px-4 rounded-sm font-mono text-xs uppercase tracking-[0.12em] no-underline border border-white/18 bg-white/[0.02] text-white/86 transition-all duration-300 ease-out hover:-translate-y-1 hover:border-brand-accent/30 hover:shadow-[0_0_20px_rgba(125,211,252,0.1)]"
+              className="group relative inline-flex items-center justify-center gap-3 h-14 md:h-16 px-8 md:px-10 border border-white/20 text-white font-mono text-xs md:text-sm uppercase tracking-[0.2em] transition-all duration-500 overflow-hidden hover:border-brand-accent"
             >
-              Get in Touch
+              <span className="relative z-10 group-hover:text-brand-dark transition-colors duration-500">Get in Touch</span>
+              <div className="absolute inset-0 bg-brand-accent transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-out" />
             </Link>
           </div>
         </div>

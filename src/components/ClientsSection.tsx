@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { urlFor } from "@/lib/sanity";
 
 interface ClientItem {
@@ -28,131 +26,104 @@ const fallbackPartners = [
   { _id: "p2", name: "Choice Bazaar", letter: "CB" },
 ];
 
-function getInitials(name: string) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 3);
-}
-
 export default function ClientsSection({ clients, partners }: ClientsSectionProps) {
-  const ref = useRef<HTMLElement>(null);
+  const displayClients = clients && clients.length > 0 ? clients : fallbackClients;
+  const displayPartners = partners && partners.length > 0 ? partners : fallbackPartners;
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".client-logo",
-        { y: 30, opacity: 0, scale: 0.9 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ref.current, start: "top 80%" },
-        }
-      );
-    }, ref);
-    return () => ctx.revert();
-  }, []);
+  // Duplicate items to ensure smooth infinite scroll
+  // We duplicate enough times so the marquee always fills ultra-wide screens seamlessly
+  const marqueeClients = [...displayClients, ...displayClients, ...displayClients, ...displayClients, ...displayClients, ...displayClients];
+  const marqueePartners = [...displayPartners, ...displayPartners, ...displayPartners, ...displayPartners, ...displayPartners, ...displayPartners];
 
-  const displayClients = clients && clients.length > 0 ? clients : null;
-  const displayPartners = partners && partners.length > 0 ? partners : null;
+  const renderItem = (item: any) => {
+    const hasLogo = !!item.logo;
+    const content = (
+      <div className="flex items-center justify-center w-[200px] md:w-[280px] h-[100px] px-8 transition-all duration-500 hover:scale-110 cursor-pointer group">
+        {hasLogo ? (
+          <img
+            src={urlFor(item.logo).width(300).height(150).url()}
+            alt={item.name}
+            className="max-w-full max-h-full object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+          />
+        ) : (
+          <span className="font-heading text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-white/30 group-hover:text-white/90 transition-all duration-500 text-center">
+            {item.name}
+          </span>
+        )}
+      </div>
+    );
+
+    return item.website ? (
+      <a href={item.website} target="_blank" rel="noopener noreferrer" className="no-underline block">
+        {content}
+      </a>
+    ) : (
+      content
+    );
+  };
 
   return (
-    <section ref={ref} className="py-[6rem] border-t border-slate-800/50">
-      <div className="w-full max-w-[1400px] mx-auto px-6">
-        {/* Clients */}
-        <div id="clients" className="mb-16">
-          <div className="text-center mb-10">
-            <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">
-              Our Clients
-            </div>
-            <h2 className="font-extrabold tracking-tight text-[36px]">Trusted By</h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-8">
-            {displayClients
-              ? displayClients.map((client) => (
-                  <a
-                    key={client._id}
-                    href={client.website || "#"}
-                    target={client.website ? "_blank" : undefined}
-                    rel="noopener noreferrer"
-                    className="client-logo opacity-0 w-[120px] h-[120px] border border-slate-800 bg-white/[0.02] flex items-center justify-center hover:border-brand-accent/30 hover:bg-brand-accent/[0.04] transition-all duration-500 group cursor-default"
-                  >
-                    {client.logo ? (
-                      <img
-                        src={urlFor(client.logo).width(96).height(96).url()}
-                        alt={client.name}
-                        className="w-14 h-14 object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
-                      />
-                    ) : (
-                      <span className="font-mono text-xs uppercase tracking-[0.16em] text-white/40 group-hover:text-brand-accent/80 transition-colors duration-500">
-                        {getInitials(client.name)}
-                      </span>
-                    )}
-                  </a>
-                ))
-              : fallbackClients.map((client) => (
-                  <div
-                    key={client._id}
-                    className="client-logo opacity-0 w-[120px] h-[120px] border border-slate-800 bg-white/[0.02] flex items-center justify-center hover:border-brand-accent/30 hover:bg-brand-accent/[0.04] transition-all duration-500 group cursor-default"
-                  >
-                    <span className="font-mono text-xs uppercase tracking-[0.16em] text-white/40 group-hover:text-brand-accent/80 transition-colors duration-500">
-                      {client.letter}
-                    </span>
-                  </div>
-                ))}
+    <section className="py-24 md:py-32 border-t border-slate-800/50 overflow-hidden relative flex flex-col gap-20">
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes marquee-left {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes marquee-right {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        .animate-marquee-left {
+          animation: marquee-left 45s linear infinite;
+        }
+        .animate-marquee-right {
+          animation: marquee-right 45s linear infinite;
+        }
+        .marquee-pause:hover {
+          animation-play-state: paused;
+        }
+      `}} />
+
+      {/* Background gradients for smooth edge fading */}
+      <div className="absolute top-0 bottom-0 left-0 w-24 md:w-64 bg-gradient-to-r from-brand-dark via-brand-dark/90 to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 bottom-0 right-0 w-24 md:w-64 bg-gradient-to-l from-brand-dark via-brand-dark/90 to-transparent z-10 pointer-events-none" />
+
+      {/* Clients Marquee */}
+      <div className="relative flex flex-col gap-6">
+        <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-between z-20 pointer-events-none">
+          <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent flex items-center gap-4">
+            <span className="w-8 h-[1px] bg-brand-accent"></span>
+            Trusted By
           </div>
         </div>
-
-        {/* Partners */}
-        <div>
-          <div className="text-center mb-10">
-            <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">
-              Our Partners
+        
+        <div className="flex w-max animate-marquee-left marquee-pause -ml-[20%]">
+          {marqueeClients.map((client, i) => (
+            <div key={`${client._id}-client-${i}`}>
+              {renderItem(client)}
             </div>
-            <h2 className="font-extrabold tracking-tight text-[36px]">Collaborators</h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-8">
-            {displayPartners
-              ? displayPartners.map((partner) => (
-                  <a
-                    key={partner._id}
-                    href={partner.website || "#"}
-                    target={partner.website ? "_blank" : undefined}
-                    rel="noopener noreferrer"
-                    className="client-logo opacity-0 w-[120px] h-[120px] border border-slate-800 bg-white/[0.02] flex items-center justify-center hover:border-brand-accent/30 hover:bg-brand-accent/[0.04] transition-all duration-500 group cursor-default"
-                  >
-                    {partner.logo ? (
-                      <img
-                        src={urlFor(partner.logo).width(96).height(96).url()}
-                        alt={partner.name}
-                        className="w-14 h-14 object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
-                      />
-                    ) : (
-                      <span className="font-mono text-xs uppercase tracking-[0.16em] text-white/40 group-hover:text-brand-accent/80 transition-colors duration-500">
-                        {getInitials(partner.name)}
-                      </span>
-                    )}
-                  </a>
-                ))
-              : fallbackPartners.map((partner) => (
-                  <div
-                    key={partner._id}
-                    className="client-logo opacity-0 w-[120px] h-[120px] border border-slate-800 bg-white/[0.02] flex items-center justify-center hover:border-brand-accent/30 hover:bg-brand-accent/[0.04] transition-all duration-500 group cursor-default"
-                  >
-                    <span className="font-mono text-xs uppercase tracking-[0.16em] text-white/40 group-hover:text-brand-accent/80 transition-colors duration-500">
-                      {partner.letter}
-                    </span>
-                  </div>
-                ))}
-          </div>
+          ))}
         </div>
       </div>
+
+      {/* Partners Marquee */}
+      <div className="relative flex flex-col gap-6">
+        <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex items-center justify-end z-20 pointer-events-none">
+          <div className="font-mono text-xs uppercase tracking-[0.22em] text-white/50 flex items-center gap-4">
+            Collaborators
+            <span className="w-8 h-[1px] bg-white/20"></span>
+          </div>
+        </div>
+        
+        <div className="flex w-max animate-marquee-right marquee-pause">
+          {marqueePartners.map((partner, i) => (
+            <div key={`${partner._id}-partner-${i}`}>
+              {renderItem(partner)}
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
   );
 }

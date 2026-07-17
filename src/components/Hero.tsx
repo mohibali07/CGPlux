@@ -10,9 +10,9 @@ interface HeroProps {
   title?: string;
   titleStroke?: string;
   subtitle?: string;
-  activeClients?: string;
-  pipeline?: string;
-  nextUpdate?: string;
+  projectsDelivered?: string;
+  techStack?: string;
+  successRate?: string;
 }
 
 export default function Hero({
@@ -20,9 +20,9 @@ export default function Hero({
   title = "Crafting digital worlds",
   titleStroke = "with precision",
   subtitle = "CGplux Studios is a dark-mode system for creative studios: monospace metadata, sharp geometry, glass depth, and heavy interactions.",
-  activeClients = "12",
-  pipeline = "24/7",
-  nextUpdate = "Aug 01",
+  projectsDelivered = "150+",
+  techStack = "Web • Mobile • AI",
+  successRate = "100%",
 }: HeroProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textContainerRef = useRef<HTMLDivElement>(null);
@@ -59,17 +59,7 @@ export default function Hero({
         1
       );
 
-      // Parallax effect on scroll
-      gsap.to(".hero-parallax-bg", {
-        yPercent: 30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+
 
       gsap.to(textContainerRef.current, {
         yPercent: 15,
@@ -109,51 +99,64 @@ export default function Hero({
         />
       </div>
 
-      <div ref={textContainerRef} className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 pt-20">
-        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12 lg:gap-24 w-full">
-          
-          {/* Main Title Left */}
-          <div className="max-w-[900px] flex-1">
-            <div className="hero-eyebrow flex items-center gap-4 mb-8 sm:mb-12">
-              <span className="w-8 h-[1px] bg-brand-accent"></span>
-              <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] text-brand-accent">
-                {eyebrow.replace(/\//g, "•")}
-              </span>
-            </div>
-            
-            <h1 className="m-0 font-heading font-medium tracking-tight text-[13vw] sm:text-[10vw] lg:text-[110px] leading-[0.9] flex flex-col">
-              <div className="hero-title-line overflow-hidden pb-2">
-                <span className="inline-block text-white">Crafting</span>
-              </div>
-              <div className="hero-title-line overflow-hidden flex items-center gap-4 sm:gap-8 pb-2">
-                <span className="inline-block text-outline italic pr-4">Digital</span>
-                <span className="hidden md:inline-block h-[1px] w-[60px] lg:w-[120px] bg-white/30"></span>
-              </div>
-              <div className="hero-title-line overflow-hidden pb-2">
-                <span className="inline-block text-white font-bold">Worlds.</span>
-              </div>
-            </h1>
+      <div ref={textContainerRef} className="relative z-10 w-full max-w-[1400px] mx-auto px-6 lg:px-12 pt-20 flex flex-col items-center justify-center text-center">
+        {/* Dark radial glow behind text to ensure perfect readability without altering the main WebGL background */}
+        <div className="absolute top-[45%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] max-w-[1000px] h-[600px] bg-black/80 blur-[120px] rounded-[100%] pointer-events-none -z-10"></div>
+        
+        {/* Eyebrow */}
+        <div className="hero-eyebrow flex items-center gap-4 mb-8 sm:mb-10">
+          <span className="w-8 sm:w-16 h-[1px] bg-brand-accent/40"></span>
+          <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] text-brand-accent/90">
+            {eyebrow.replace(/\//g, "•")}
+          </span>
+          <span className="w-8 sm:w-16 h-[1px] bg-brand-accent/40"></span>
+        </div>
+        
+        {/* Main Title */}
+        <h1 className="m-0 font-heading font-medium tracking-tight text-[14vw] sm:text-[11vw] lg:text-[120px] leading-[0.85] flex flex-col items-center">
+          <div className="hero-title-line overflow-hidden pb-2">
+            <span className="inline-block text-white drop-shadow-lg">Crafting</span>
           </div>
+          <div className="hero-title-line overflow-hidden flex items-center justify-center pb-2">
+            <span className="inline-block text-outline italic pr-4 sm:pr-8">Digital</span>
+          </div>
+          <div className="hero-title-line overflow-hidden pb-2">
+            <span className="inline-block text-white font-bold drop-shadow-lg">Worlds.</span>
+          </div>
+        </h1>
 
-          {/* Subtitle & CTA Right */}
-          <div className="max-w-[420px] flex flex-col items-start lg:items-start pb-4">
-            <p className="hero-subtitle text-slate-400 text-sm sm:text-base leading-[1.8] font-light mb-10">
-              {subtitle}
-            </p>
+        {/* Subtitle */}
+        <p className="hero-subtitle text-white/90 drop-shadow-lg text-sm sm:text-base leading-[1.8] font-light mt-10 mb-12 max-w-[500px] mx-auto">
+          {subtitle}
+        </p>
 
-            <div className="flex items-center gap-4">
-              <Link
-                href="/projects"
-                className="hero-button group relative inline-flex items-center justify-center h-[54px] px-8 rounded-full font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] bg-white text-black overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-brand-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
-                <span className="relative z-10 group-hover:text-white transition-colors duration-500">View Work</span>
-              </Link>
-              
-              <Link href="#about" className="hero-button w-[54px] h-[54px] rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/5 hover:border-white/40 transition-all">
-                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-              </Link>
-            </div>
+        {/* CTA Buttons */}
+        <div className="flex items-center justify-center gap-4 sm:gap-6">
+          <Link
+            href="/projects"
+            className="hero-button group relative inline-flex items-center justify-center h-[54px] px-8 sm:px-10 rounded-full font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] bg-white overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(56,199,192,0.3)] transition-shadow duration-500"
+          >
+            <div className="absolute inset-0 bg-brand-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />
+            <span className="relative z-10 text-brand-dark group-hover:text-white transition-colors duration-500 font-bold">View Work</span>
+          </Link>
+          
+          <Link href="#about" className="hero-button w-[54px] h-[54px] rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10 hover:border-white/40 transition-all backdrop-blur-md">
+             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:opacity-100 transition-opacity"><path d="m6 9 6 6 6-6"/></svg>
+          </Link>
+        </div>
+      </div>
+
+      {/* Minimal Stats Bar at Bottom */}
+      <div className="absolute bottom-0 left-0 w-full border-t border-white/5 bg-black/20 backdrop-blur-xl hidden md:block">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
+          <div className="flex items-center gap-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse-dot"></span>
+            <span>Projects Delivered <span className="text-white ml-2">{projectsDelivered}</span></span>
+          </div>
+          <div className="flex items-center gap-12">
+            <span>Tech Stack <span className="text-white ml-2">{techStack}</span></span>
+            <span className="w-[1px] h-4 bg-white/10"></span>
+            <span>Success Rate <span className="text-white ml-2">{successRate}</span></span>
           </div>
         </div>
       </div>
