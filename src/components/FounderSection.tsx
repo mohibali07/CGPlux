@@ -40,8 +40,8 @@ export default function FounderSection({ name, role, designation, bio, photo, in
   }, []);
 
   const defaultBio = [
-    "Driven by a passion for CGI, VFX, and cinematic storytelling, our founder built this studio with a vision to create world-class advertising visuals that leave a lasting impact. By blending creativity, realism, and innovation, we focus on crafting high-end visual experiences that help brands stand out in today's fast-moving digital world.",
-    "Under this direction, the studio continues to push the boundaries of modern advertising through visually striking and emotionally engaging content.",
+    "Driven by a passion for CGI, VFX, and cinematic storytelling, our leadership built this studio with a vision to create world-class advertising visuals that leave a lasting impact. By blending creativity, realism, and innovation, we focus on crafting high-end visual experiences that help brands stand out in today's fast-moving digital world.",
+    "Under their combined direction, the studio continues to push the boundaries of modern advertising through visually striking and emotionally engaging content.",
   ];
 
   const displayBio = bio && bio.length > 0 ? bio : defaultBio;
@@ -49,41 +49,62 @@ export default function FounderSection({ name, role, designation, bio, photo, in
   const photoSrc = photo
     ? urlFor(photo).width(800).height(1000).url()
     : "/CEO Founder.avif";
+  const photoSrc2 = "/CEO Founder.avif"; // Using same fallback image until a second one is provided
 
   return (
-    <section ref={ref} className="py-24 md:py-32 bg-brand-dark">
+    <section ref={ref} className="py-24 md:py-32 bg-brand-dark overflow-hidden">
       <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
         
-        {/* Left Visual Panel */}
-        <div className="founder-animate lg:w-5/12 w-full flex justify-center lg:justify-start">
-          <div className="relative w-full max-w-[480px] aspect-[4/5] bg-black/50 overflow-hidden border border-white/[0.08] group">
+        {/* Left Visual Panel: 2 Staggered Images */}
+        <div className="founder-animate lg:w-5/12 w-full flex justify-center gap-4 sm:gap-6 relative">
+          
+          {/* CEO Image Card */}
+          <div className="w-1/2 relative aspect-[3/4] bg-black/50 overflow-hidden border border-white/[0.08] group transform -translate-y-6 sm:-translate-y-12">
+            <div className="absolute inset-0 bg-brand-accent/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
             <img
               src={photoSrc}
-              alt={name || "CEO Founder"}
+              alt="CEO"
               className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
             />
-            {/* Minimal Decorative Corner Accents */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30 z-10"></div>
-            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/30 z-10"></div>
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/30 z-10"></div>
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30 z-10"></div>
+            <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <div className="font-mono text-[10px] tracking-widest text-brand-accent uppercase mb-1">Chief Exec.</div>
+              <div className="font-heading font-bold tracking-tight text-white text-xl">The CEO</div>
+            </div>
           </div>
+
+          {/* Founder Image Card */}
+          <div className="w-1/2 relative aspect-[3/4] bg-black/50 overflow-hidden border border-white/[0.08] group transform translate-y-6 sm:translate-y-12">
+            <div className="absolute inset-0 bg-brand-accent/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+            <img
+              src={photoSrc2}
+              alt="Founder"
+              className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+            />
+            <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <div className="font-mono text-[10px] tracking-widest text-brand-accent uppercase mb-1">Visionary</div>
+              <div className="font-heading font-bold tracking-tight text-white text-xl">The Founder</div>
+            </div>
+          </div>
+
+          {/* Minimal Background Blur Element */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[80%] bg-brand-accent/5 blur-[80px] rounded-full pointer-events-none -z-10"></div>
         </div>
 
         {/* Right Typography Panel */}
-        <div className="founder-animate lg:w-7/12 w-full flex flex-col">
+        <div className="founder-animate lg:w-7/12 w-full flex flex-col mt-12 lg:mt-0">
           
-          <div className="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-6 flex items-center gap-4">
+          <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 mb-6 flex items-center gap-4">
             <span className="w-8 h-[1px] bg-brand-accent"></span>
             Leadership
           </div>
           
-          <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white mb-3">
-            {name || "CEO & Founder"}
+          <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white mb-4">
+            The Minds Behind<br/>
+            <span className="text-white/50 italic font-light">The Studio</span>
           </h2>
           
           <div className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-brand-accent mb-10">
-            {designation || role || "Creative Director"}
+            CEO & Founder
           </div>
           
           <div className="flex flex-col gap-6 text-white/60 leading-[1.8] text-[15px] md:text-[16px] max-w-[65ch]">
