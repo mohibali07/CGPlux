@@ -15,10 +15,11 @@ import {
   getFounderProfile,
   getClients,
   getBlogPosts,
+  getHomePage,
 } from "@/lib/sanity";
 
 export default async function Home() {
-  const [projects, services, testimonials, settings, founder, allClients, blogPosts] =
+  const [projects, services, testimonials, settings, founder, allClients, blogPosts, homePage] =
     await Promise.all([
       getProjects().catch(() => []),
       getServices().catch(() => []),
@@ -27,6 +28,7 @@ export default async function Home() {
       getFounderProfile().catch(() => null),
       getClients().catch(() => []),
       getBlogPosts().catch(() => []),
+      getHomePage().catch(() => null),
     ]);
 
   const clients = allClients.filter((c: { isPartner?: boolean }) => !c.isPartner);
@@ -35,20 +37,20 @@ export default async function Home() {
   return (
     <>
       <Hero
-        eyebrow={settings?.heroEyebrow}
-        title={settings?.heroTitle}
-        titleStroke={settings?.heroTitleStroke}
-        subtitle={settings?.heroSubtitle}
-        projectsDelivered="150+"
-        techStack="Web • Mobile • AI"
-        successRate="100%"
+        eyebrow={homePage?.heroEyebrow}
+        title={homePage?.heroTitle}
+        titleStroke={homePage?.heroTitleStroke}
+        subtitle={homePage?.heroSubtitle}
+        projectsDelivered={homePage?.projectsDelivered || "150+"}
+        techStack={homePage?.techStack || "Web • Mobile • AI"}
+        successRate={homePage?.successRate || "100%"}
       />
       <AboutSection
-        eyebrow={settings?.aboutEyebrow}
-        title={settings?.aboutTitle}
-        paragraphs={settings?.aboutParagraphs}
-        stat={settings?.aboutStat}
-        statLabel={settings?.aboutStatLabel}
+        eyebrow={homePage?.aboutEyebrow}
+        title={homePage?.aboutTitle}
+        paragraphs={homePage?.aboutParagraphs}
+        stat={homePage?.aboutStat}
+        statLabel={homePage?.aboutStatLabel}
       />
       <ClientsSection clients={clients} partners={partners} />
       <ProjectCards projects={projects} />
@@ -65,9 +67,9 @@ export default async function Home() {
       />
       <BlogPreview posts={blogPosts} />
       <ContactCTA
-        ctaTitle={settings?.ctaTitle}
-        ctaSubtitle={settings?.ctaSubtitle}
-        ctaEmail={settings?.ctaEmail}
+        ctaTitle={homePage?.ctaTitle}
+        ctaSubtitle={homePage?.ctaSubtitle}
+        ctaEmail={homePage?.ctaEmail}
       />
     </>
   );

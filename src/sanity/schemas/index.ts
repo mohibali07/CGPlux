@@ -8,6 +8,15 @@ import { portfolioItem } from "./portfolioItem";
 import { founderProfile } from "./founderProfile";
 import { client } from "./client";
 
+// Pages
+import { homePage } from "./homePage";
+import { aboutPage } from "./aboutPage";
+import { servicesPage } from "./servicesPage";
+import { teamPage } from "./teamPage";
+import { contactPage } from "./contactPage";
+import { portfolioPage } from "./portfolioPage";
+import { blogPage } from "./blogPage";
+
 export const schemaTypes = [
   project,
   service,
@@ -18,4 +27,13 @@ export const schemaTypes = [
   portfolioItem,
   founderProfile,
   client,
+  
+  // Pages
+  homePage,
+  aboutPage,
+  servicesPage,
+  teamPage,
+  contactPage,
+  portfolioPage,
+  blogPage,
 ];

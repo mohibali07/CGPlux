@@ -1,23 +1,29 @@
 import { Metadata } from "next";
+import { getSiteSettings, getContactPage } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "Contact | CGplux Studios",
   description: "Get in touch with CGplux Studios.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [settings, contactPage] = await Promise.all([
+    getSiteSettings().catch(() => null),
+    getContactPage().catch(() => null),
+  ]);
+
   return (
     <section className="py-[6rem]">
       <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
         <div className="mb-10">
           <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">
-            Contact
+            {contactPage?.eyebrow || "Contact"}
           </div>
           <h1 className="font-extrabold tracking-tight text-[48px] max-md:text-[36px] mb-4">
-            Get in Touch
+            {contactPage?.title || "Get in Touch"}
           </h1>
           <p className="text-white/72 max-w-[55ch] leading-[1.7]">
-            We&apos;re happy to talk to you. Let&apos;s schedule a call.
+            {contactPage?.subtitle || "We're happy to talk to you. Let's schedule a call."}
           </p>
         </div>
 
@@ -30,8 +36,8 @@ export default function ContactPage() {
                 <span className="w-4 h-[1px] bg-brand-accent transition-all duration-500 group-hover:w-8"></span>
                 Call Us
               </div>
-              <a href="tel:+923191086099" className="text-2xl md:text-3xl font-heading font-medium tracking-tight text-white/90 hover:text-brand-accent transition-colors duration-500">
-                +92 319 1086099
+              <a href={`tel:${contactPage?.contactPhone || settings?.contactPhone || "+923191086099"}`} className="text-2xl md:text-3xl font-heading font-medium tracking-tight text-white/90 hover:text-brand-accent transition-colors duration-500">
+                {contactPage?.contactPhone || settings?.contactPhone || "+92 319 1086099"}
               </a>
             </div>
 
@@ -40,8 +46,8 @@ export default function ContactPage() {
                 <span className="w-4 h-[1px] bg-brand-accent transition-all duration-500 group-hover:w-8"></span>
                 Email Us
               </div>
-              <a href="mailto:info@CGpluxdigital.com" className="text-2xl md:text-[28px] font-heading font-medium tracking-tight text-white/90 hover:text-brand-accent transition-colors duration-500">
-                info@CGpluxdigital.com
+              <a href={`mailto:${contactPage?.contactEmail || settings?.contactEmail || "info@CGpluxdigital.com"}`} className="text-2xl md:text-[28px] font-heading font-medium tracking-tight text-white/90 hover:text-brand-accent transition-colors duration-500">
+                {contactPage?.contactEmail || settings?.contactEmail || "info@CGpluxdigital.com"}
               </a>
             </div>
 
@@ -50,18 +56,17 @@ export default function ContactPage() {
                 <span className="w-4 h-[1px] bg-brand-accent transition-all duration-500 group-hover:w-8"></span>
                 Headquarters
               </div>
-              <p className="text-lg md:text-xl font-light text-white/60 leading-relaxed">
-                Creative Studio, Digital Hub<br />
-                Pakistan
+              <p className="text-lg md:text-xl font-light text-white/60 leading-relaxed whitespace-pre-wrap">
+                {contactPage?.contactAddress || settings?.contactAddress || "Creative Studio, Digital Hub\nPakistan"}
               </p>
             </div>
 
             {/* Social */}
             <div className="flex gap-4 mt-4">
-              <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:border-brand-accent hover:text-brand-dark hover:bg-brand-accent transition-all duration-500" aria-label="Instagram">
+              <a href={settings?.instagramUrl || "#"} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:border-brand-accent hover:text-brand-dark hover:bg-brand-accent transition-all duration-500" aria-label="Instagram">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
               </a>
-              <a href="#" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:border-brand-accent hover:text-brand-dark hover:bg-brand-accent transition-all duration-500" aria-label="Behance">
+              <a href={settings?.behanceUrl || "#"} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:border-brand-accent hover:text-brand-dark hover:bg-brand-accent transition-all duration-500" aria-label="Behance">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.338.5-.837.9-1.502 1.22.906.26 1.576.72 2.022 1.37.448.66.665 1.45.665 2.36 0 .75-.13 1.39-.41 1.93-.28.55-.67 1-1.16 1.35-.48.348-1.05.6-1.67.767-.62.16-1.26.25-1.92.25H0V4.51h6.938v-.007zM6.545 10.16c.58 0 1.07-.15 1.46-.44.395-.3.59-.74.59-1.31 0-.35-.07-.64-.21-.86a1.45 1.45 0 00-.59-.52 2.18 2.18 0 00-.84-.16c-.32 0-.6.03-.86.11-.26.08-.48.19-.65.33-.17.15-.3.32-.39.52-.09.2-.14.41-.14.64 0 .59.19 1.04.57 1.35.38.31.88.46 1.48.46zm4.21 7.1c.24.28.59.42 1.06.42.43 0 .8-.14 1.11-.42.31-.28.54-.56.6-.94h2.53c-.02.66-.22 1.23-.58 1.69-.37.47-.85.82-1.45 1.06-.6.24-1.25.36-1.95.36-.72 0-1.37-.11-1.95-.34-.58-.23-1.07-.57-1.48-1.01-.4-.44-.72-.97-.95-1.58-.23-.62-.34-1.27-.34-1.97 0-.66.11-1.3.34-1.9.23-.61.55-1.13.96-1.57.41-.44.91-.78 1.49-1.02.59-.24 1.24-.36 1.96-.36.78 0 1.44.14 2.01.41.56.27 1.02.65 1.37 1.15.35.5.59 1.07.73 1.73.14.66.16 1.35.06 2.08h-7.55c.03.72.24 1.26.62 1.54l-.01.01zm2.67-4.65c-.17-.44-.51-.77-1.04-.97-.53-.21-1.06-.25-1.58-.12-.53.13-.96.34-1.3.63-.34.29-.6.63-.78 1.01-.18.39-.29.77-.32 1.15h5.02z"/></svg>
               </a>
             </div>

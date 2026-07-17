@@ -122,11 +122,11 @@ export default function ServicesShowcase({ services }: ServicesShowcaseProps) {
                 <div className="flex-shrink-0 mb-2">
                   <Link
                     href={service.slug ? `/services/${service.slug.current}` : '#'}
-                    className="group/btn inline-flex items-center gap-6 px-8 py-5 rounded-full bg-white text-black font-mono text-xs md:text-sm uppercase tracking-[0.2em] font-bold hover:bg-brand-accent hover:text-white transition-all duration-500 overflow-hidden relative"
+                    className="group/btn inline-flex items-center gap-6 px-8 py-5 rounded-full bg-white text-brand-dark font-mono text-xs md:text-sm uppercase tracking-[0.2em] font-bold hover:bg-brand-accent transition-all duration-500 overflow-hidden relative"
                   >
-                    <span className="relative z-10 flex items-center gap-4">
+                    <span className="relative z-10 flex items-center gap-4 text-brand-dark">
                       Explore Full Detail
-                      <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                      <svg className="w-5 h-5 transform group-hover/btn:translate-x-2 transition-transform duration-300 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                     </span>
                   </Link>
                 </div>

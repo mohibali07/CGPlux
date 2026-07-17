@@ -64,21 +64,9 @@ export async function getTestimonials() {
 export async function getSiteSettings() {
   return getClient().fetch(`*[_type == "siteSettings"][0] {
     title,
-    heroEyebrow,
-    heroTitle,
-    heroTitleStroke,
-    heroSubtitle,
     activeClients,
     pipeline,
     nextUpdate,
-    aboutEyebrow,
-    aboutTitle,
-    aboutParagraphs,
-    aboutStat,
-    aboutStatLabel,
-    ctaTitle,
-    ctaSubtitle,
-    ctaEmail,
     contactPhone,
     contactEmail,
     contactAddress,
@@ -86,6 +74,34 @@ export async function getSiteSettings() {
     behanceUrl,
     linkedinUrl
   }`);
+}
+
+export async function getHomePage() {
+  return getClient().fetch(`*[_type == "homePage"][0]`);
+}
+
+export async function getAboutPage() {
+  return getClient().fetch(`*[_type == "aboutPage"][0]`);
+}
+
+export async function getServicesPage() {
+  return getClient().fetch(`*[_type == "servicesPage"][0]`);
+}
+
+export async function getTeamPage() {
+  return getClient().fetch(`*[_type == "teamPage"][0]`);
+}
+
+export async function getContactPage() {
+  return getClient().fetch(`*[_type == "contactPage"][0]`);
+}
+
+export async function getPortfolioPage() {
+  return getClient().fetch(`*[_type == "portfolioPage"][0]`);
+}
+
+export async function getBlogPage() {
+  return getClient().fetch(`*[_type == "blogPage"][0]`);
 }
 
 export async function getTeamMembers() {
