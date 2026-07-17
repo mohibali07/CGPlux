@@ -45,10 +45,26 @@ export async function getServices() {
   return getClient().fetch(`*[_type == "service"] | order(order asc) {
     _id,
     title,
+    slug,
     description,
     tags,
     image
   }`);
+}
+
+export async function getServiceBySlug(slug: string) {
+  return getClient().fetch(
+    `*[_type == "service" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      description,
+      content,
+      tags,
+      image
+    }`,
+    { slug }
+  );
 }
 
 export async function getTestimonials() {
@@ -159,6 +175,10 @@ export async function getPortfolioItems(category?: string) {
 export async function getFounderProfile() {
   return getClient().fetch(`*[_type == "founderProfile"][0] {
     _id,
+    sectionEyebrow,
+    sectionTitle,
+    imageEyebrow,
+    imageTitle,
     name,
     role,
     designation,

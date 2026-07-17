@@ -17,6 +17,20 @@ export const service = defineType({
       type: "string",
     }),
     defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      options: { source: "title", maxLength: 96 },
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "content",
+      title: "Service Details (Content)",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Rich text content for the single service page.",
+    }),
+    defineField({
       name: "tags",
       title: "Tags",
       type: "array",

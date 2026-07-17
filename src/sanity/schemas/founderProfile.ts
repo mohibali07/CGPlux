@@ -5,6 +5,12 @@ export const founderProfile = defineType({
   title: "Founder Profile",
   type: "document",
   fields: [
+    // Section Headers
+    defineField({ name: "sectionEyebrow", title: "Section Eyebrow", type: "string" }),
+    defineField({ name: "sectionTitle", title: "Section Title", type: "string" }),
+    defineField({ name: "imageEyebrow", title: "Image Label Eyebrow", type: "string" }),
+    defineField({ name: "imageTitle", title: "Image Label Title", type: "string" }),
+
     defineField({ name: "name", title: "CEO Full Name", type: "string", validation: (r) => r.required() }),
     defineField({ name: "role", title: "CEO Role / Title", type: "string" }),
     defineField({ name: "designation", title: "CEO Secondary Designation", type: "string" }),

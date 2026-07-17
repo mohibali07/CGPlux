@@ -57,6 +57,10 @@ export default async function Home() {
       <ServiceGrid services={services} />
       <TestimonialsSlider testimonials={testimonials} />
       <FounderSection
+        sectionEyebrow={founder?.sectionEyebrow}
+        sectionTitle={founder?.sectionTitle}
+        imageEyebrow={founder?.imageEyebrow}
+        imageTitle={founder?.imageTitle}
         name={founder?.name}
         role={founder?.role}
         designation={founder?.designation}

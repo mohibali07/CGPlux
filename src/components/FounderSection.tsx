@@ -5,6 +5,10 @@ import { gsap } from "@/lib/gsap";
 import { urlFor } from "@/lib/sanity";
 
 interface FounderProps {
+  sectionEyebrow?: string;
+  sectionTitle?: string;
+  imageEyebrow?: string;
+  imageTitle?: string;
   name?: string;
   role?: string;
   designation?: string;
@@ -18,6 +22,7 @@ interface FounderProps {
 }
 
 export default function FounderSection({ 
+  sectionEyebrow, sectionTitle, imageEyebrow, imageTitle,
   name, role, designation, bio, 
   coFounderName, coFounderRole, coFounderBio, 
   photo, instagramUrl, linkedinUrl 
@@ -76,8 +81,8 @@ export default function FounderSection({
               className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
             />
             <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-              <div className="font-mono text-[10px] tracking-widest text-brand-accent uppercase mb-1">Founders</div>
-              <div className="font-heading font-bold tracking-tight text-white text-xl">The Leadership</div>
+              <div className="font-mono text-[10px] tracking-widest text-brand-accent uppercase mb-1">{imageEyebrow || "Founders"}</div>
+              <div className="font-heading font-bold tracking-tight text-white text-xl">{imageTitle || "The Leadership"}</div>
             </div>
           </div>
 
@@ -90,13 +95,20 @@ export default function FounderSection({
           
           <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 mb-6 flex items-center gap-4">
             <span className="w-8 h-[1px] bg-brand-accent"></span>
-            Leadership
+            {sectionEyebrow || "Leadership"}
           </div>
           
-          <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white mb-10">
-            The Minds Behind<br/>
-            <span className="text-white/50 italic font-light">The Studio</span>
-          </h2>
+          {sectionTitle ? (
+            <h2 
+              className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white mb-10 whitespace-pre-line"
+              dangerouslySetInnerHTML={{ __html: sectionTitle }}
+            />
+          ) : (
+            <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white mb-10">
+              The Minds Behind<br/>
+              <span className="text-white/50 italic font-light">The Studio</span>
+            </h2>
+          )}
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
             {/* CEO Intro */}
