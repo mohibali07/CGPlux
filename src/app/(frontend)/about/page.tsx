@@ -22,7 +22,7 @@ export default async function AboutPage() {
 
   return (
     <>
-      <div className="pt-20 pb-10 px-6 max-w-[1920px] mx-auto text-center border-b border-white/[0.04]">
+      <div className="pt-20 pb-10 px-6 lg:px-12 max-w-[1400px] mx-auto text-center border-b border-white/[0.04]">
         <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-4">
           Who We Are
         </div>

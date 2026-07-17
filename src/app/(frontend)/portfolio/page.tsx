@@ -12,7 +12,7 @@ export default async function PortfolioPage() {
 
   return (
     <section className="py-[6rem]">
-      <div className="w-full max-w-[1920px] mx-auto px-6">
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
         <PortfolioGrid items={items} />
       </div>
     </section>

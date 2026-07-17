@@ -117,7 +117,7 @@ export default function ServiceGrid({ services }: ServiceGridProps) {
 
         {/* Right Visual Panel */}
         <div className="lg:w-1/2 flex items-center justify-center min-h-[500px] lg:min-h-[700px]">
-          <div className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-full max-h-[850px] overflow-hidden bg-black/50 border border-white/[0.08]">
+          <div className="relative w-full aspect-[4/5] lg:aspect-auto lg:h-full max-h-[850px] overflow-hidden bg-black border border-white/[0.08] rounded-xl group">
             {items[activeIdx].image ? (
               <div ref={imageRef} className="absolute inset-0 w-full h-full">
                 <Image
@@ -129,21 +129,25 @@ export default function ServiceGrid({ services }: ServiceGridProps) {
                   alt={items[activeIdx].title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-700 ease-out"
+                  className="object-cover grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105"
                   priority
                 />
               </div>
             ) : (
-              <div ref={imageRef} className="absolute inset-0 w-full h-full flex items-center justify-center">
-                 <span className="font-mono text-xs text-white/20 uppercase tracking-[0.2em]">No Media Found</span>
+              <div ref={imageRef} className="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900/50 to-black transition-transform duration-700 group-hover:scale-105">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,199,192,0.15),transparent_50%)] opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+                <span className="relative z-10 font-mono text-xs text-white/40 uppercase tracking-[0.2em]">Service Visualization</span>
               </div>
             )}
             
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute inset-0 shadow-[inset_0_0_80px_rgba(56,199,192,0.03)] group-hover:shadow-[inset_0_0_80px_rgba(56,199,192,0.1)] transition-shadow duration-700 pointer-events-none" />
+            
             {/* Minimal Decorative Corner Accents */}
-            <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-white/30 z-10"></div>
-            <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-white/30 z-10"></div>
-            <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-white/30 z-10"></div>
-            <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white/30 z-10"></div>
+            <div className="absolute top-6 left-6 w-4 h-4 border-t border-l border-white/20 transition-colors duration-500 group-hover:border-brand-accent/50 z-10"></div>
+            <div className="absolute top-6 right-6 w-4 h-4 border-t border-r border-white/20 transition-colors duration-500 group-hover:border-brand-accent/50 z-10"></div>
+            <div className="absolute bottom-6 left-6 w-4 h-4 border-b border-l border-white/20 transition-colors duration-500 group-hover:border-brand-accent/50 z-10"></div>
+            <div className="absolute bottom-6 right-6 w-4 h-4 border-b border-r border-white/20 transition-colors duration-500 group-hover:border-brand-accent/50 z-10"></div>
           </div>
         </div>
         

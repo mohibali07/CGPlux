@@ -62,7 +62,7 @@ export default function Header() {
           isVisible ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="absolute inset-0 glass-panel border-b border-white/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-xl border-b border-white/[0.08] pointer-events-none" />
 
         <Link
           href="/"

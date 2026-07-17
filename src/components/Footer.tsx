@@ -37,9 +37,10 @@ export default function Footer({ instagramUrl, behanceUrl, linkedinUrl }: Footer
   }, []);
 
   return (
-    <footer ref={footerRef} className="pt-24 pb-8 bg-brand-dark border-t border-white/[0.05] relative overflow-hidden">
+    <footer ref={footerRef} className="pt-24 pb-8 bg-black border-t border-white/[0.08] relative overflow-hidden">
       
-      {/* Subtle Grid Background */}
+      {/* Subtle Grid Background & Radial Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(56,199,192,0.05),transparent_50%)] pointer-events-none" />
       <div className="absolute inset-0 bg-grid opacity-[0.02] pointer-events-none" />
 
       <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
@@ -137,7 +138,7 @@ export default function Footer({ instagramUrl, behanceUrl, linkedinUrl }: Footer
               className="font-heading font-black tracking-tighter text-transparent select-none leading-[0.75] pb-4"
               style={{
                 fontSize: "clamp(80px, 16vw, 300px)",
-                WebkitTextStroke: "1px rgba(255,255,255,0.03)",
+                WebkitTextStroke: "1px rgba(255,255,255,0.05)",
               }}
             >
               CGPLUX

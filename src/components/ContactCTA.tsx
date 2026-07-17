@@ -43,8 +43,11 @@ export default function ContactCTA({ ctaTitle, ctaSubtitle, ctaEmail }: ContactC
   const email = ctaEmail || "hello@CGpluxdigital.com";
 
   return (
-    <section ref={sectionRef} className="py-24 md:py-32 bg-brand-dark">
-      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
+    <section ref={sectionRef} className="py-24 md:py-32 bg-brand-dark relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[1000px] h-[600px] bg-[radial-gradient(ellipse_at_center,rgba(56,199,192,0.08),transparent_70%)] pointer-events-none z-0" />
+      
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
         <div
           ref={contentRef}
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 lg:gap-20 py-16 md:py-24 border-t border-b border-white/[0.05]"

@@ -153,10 +153,14 @@ export default function TestimonialsSlider({ testimonials }: TestimonialsSliderP
         </div>
 
         {/* Quote Container */}
-        <div className="relative w-full max-w-5xl min-h-[400px] flex flex-col items-center justify-center text-center">
+        <div className="relative w-full max-w-5xl min-h-[400px] flex flex-col items-center justify-center text-center bg-black/40 border border-white/[0.08] rounded-2xl p-10 md:p-16 backdrop-blur-md overflow-hidden shadow-2xl">
+          
+          {/* Glassmorphic Backgrounds */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/40 to-black/80 pointer-events-none -z-10" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(56,199,192,0.08),transparent_70%)] pointer-events-none -z-10" />
           
           {/* Huge Quote Mark Accent */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[40%] text-[180px] md:text-[280px] leading-none text-white/[0.02] font-serif pointer-events-none select-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[20%] text-[180px] md:text-[280px] leading-none text-white/[0.03] font-serif pointer-events-none select-none z-0">
             &ldquo;
           </div>
 

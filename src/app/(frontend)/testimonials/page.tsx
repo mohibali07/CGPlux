@@ -12,7 +12,7 @@ export default async function TestimonialsPage() {
 
   return (
     <section className="py-[6rem]">
-      <div className="w-full max-w-[1920px] mx-auto px-6 mb-10 text-center">
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 mb-10 text-center">
         <div className="font-mono text-xs uppercase tracking-[0.22em] text-brand-accent/90 mb-3">
           Client Voices
         </div>

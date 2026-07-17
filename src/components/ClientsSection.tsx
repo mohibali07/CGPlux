@@ -46,7 +46,7 @@ export default function ClientsSection({ clients, partners }: ClientsSectionProp
             className="max-w-full max-h-full object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
           />
         ) : (
-          <span className="font-heading text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-white/30 group-hover:text-white/90 transition-all duration-500 text-center">
+          <span className="font-heading text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-white/20 group-hover:text-brand-accent transition-colors duration-700 text-center">
             {item.name}
           </span>
         )}
@@ -63,7 +63,7 @@ export default function ClientsSection({ clients, partners }: ClientsSectionProp
   };
 
   return (
-    <section className="py-24 md:py-32 border-t border-slate-800/50 overflow-hidden relative flex flex-col gap-20">
+    <section className="py-24 md:py-32 bg-brand-dark border-y border-white/[0.02] overflow-hidden relative flex flex-col gap-20">
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes marquee-left {
           0% { transform: translateX(0); }

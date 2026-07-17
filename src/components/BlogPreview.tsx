@@ -103,44 +103,49 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
           </Link>
         </div>
 
-        {/* Minimal Typographic Rows */}
-        <div className="flex flex-col border-t border-white/[0.05]">
+        {/* Glassmorphic Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {displayPosts.map((post) => (
             <Link
               key={post._id}
               href={post.slug ? `/blog/${post.slug.current}` : "#"}
-              className="blog-card opacity-0 group flex flex-col md:flex-row md:items-center justify-between gap-6 py-8 md:py-12 border-b border-white/[0.05] hover:bg-white/[0.02] px-4 -mx-4 transition-all duration-500 no-underline cursor-pointer"
+              className="blog-card opacity-0 project-card magnetic relative aspect-[4/3] rounded-xl border border-white/[0.08] bg-black overflow-hidden group"
             >
+              <div className="absolute inset-0 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05]">
+                {post.image ? (
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-all duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] filter grayscale-[0.8] brightness-[0.8] group-hover:grayscale-0 group-hover:brightness-100"
+                  />
+                ) : (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 to-black" />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,199,192,0.15),transparent_50%)] opacity-50 group-hover:opacity-100 transition-opacity duration-700" />
+                  </>
+                )}
+              </div>
               
-              <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-16 lg:gap-32 flex-1">
-                {/* Date */}
-                <div className="font-mono text-[11px] md:text-xs uppercase tracking-[0.2em] text-white/30 w-32 shrink-0 group-hover:text-brand-accent transition-colors duration-500">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              {/* Minimal Arrow Icon on Hover */}
+              <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 backdrop-blur-md border border-white/20 text-white z-10">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
+
+              <div className="absolute left-0 right-0 bottom-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-[1s] ease-[cubic-bezier(0.25,1,0.5,1)] z-10">
+                {post.category && (
+                  <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-accent mb-3">
+                    {post.category}
+                  </div>
+                )}
+                <h3 className="font-heading font-extrabold tracking-tighter text-2xl text-white mb-2 group-hover:text-brand-accent transition-colors duration-500">
+                  {post.title}
+                </h3>
+                <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 opacity-0 group-hover:opacity-100 transition-opacity duration-[1s] delay-100">
                   {formatDate(post.publishedAt)}
                 </div>
-                
-                {/* Title & Category */}
-                <div className="flex flex-col gap-3 md:gap-4">
-                   <h3 className="font-heading text-2xl md:text-[32px] lg:text-[40px] font-bold tracking-tight text-white/70 group-hover:text-white transition-all duration-500 transform group-hover:translate-x-2">
-                     {post.title}
-                   </h3>
-                   {post.category && (
-                     <div className="flex items-center gap-3">
-                       <span className="w-4 h-[1px] bg-white/20 group-hover:bg-brand-accent transition-colors"></span>
-                       <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-brand-accent transition-colors">
-                         {post.category}
-                       </span>
-                     </div>
-                   )}
-                </div>
               </div>
-
-              {/* Hover Arrow Indicator */}
-              <div className="hidden md:flex items-center shrink-0">
-                 <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/30 group-hover:bg-brand-accent group-hover:text-brand-dark group-hover:border-brand-accent transition-all duration-500 transform group-hover:-rotate-45">
-                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                 </div>
-              </div>
-
             </Link>
           ))}
         </div>
