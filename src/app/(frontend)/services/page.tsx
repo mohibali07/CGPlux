@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ServiceGrid from "@/components/ServiceGrid";
+import ServicesShowcase from "@/components/ServicesShowcase";
 import { getServices } from "@/lib/sanity";
 
 export const metadata: Metadata = {
@@ -23,7 +23,9 @@ export default async function ServicesPage() {
           Precision-driven design and development for creative studios and agencies.
         </p>
       </div>
-      <ServiceGrid services={services} />
+      <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
+        <ServicesShowcase services={services} />
+      </div>
     </section>
   );
 }
