@@ -5,19 +5,31 @@ export const founderProfile = defineType({
   title: "Founder Profile",
   type: "document",
   fields: [
-    defineField({ name: "name", title: "Full Name", type: "string", validation: (r) => r.required() }),
-    defineField({ name: "role", title: "Role / Title", type: "string" }),
-    defineField({ name: "designation", title: "Secondary Designation", type: "string" }),
+    defineField({ name: "name", title: "CEO Full Name", type: "string", validation: (r) => r.required() }),
+    defineField({ name: "role", title: "CEO Role / Title", type: "string" }),
+    defineField({ name: "designation", title: "CEO Secondary Designation", type: "string" }),
     defineField({
       name: "bio",
-      title: "Bio Paragraphs",
+      title: "CEO Bio Paragraphs",
       type: "array",
       of: [{ type: "text" }],
-      description: "Each item is a separate paragraph in the bio.",
+      description: "Each item is a separate paragraph in the CEO's bio.",
     }),
+    
+    // Co-Founder Fields
+    defineField({ name: "coFounderName", title: "Co-Founder Full Name", type: "string" }),
+    defineField({ name: "coFounderRole", title: "Co-Founder Role / Title", type: "string" }),
+    defineField({
+      name: "coFounderBio",
+      title: "Co-Founder Bio Paragraphs",
+      type: "array",
+      of: [{ type: "text" }],
+      description: "Each item is a separate paragraph in the Co-Founder's bio.",
+    }),
+
     defineField({
       name: "photo",
-      title: "Photo",
+      title: "Founders Photo (Single Image)",
       type: "image",
       options: { hotspot: true },
     }),

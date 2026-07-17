@@ -9,12 +9,19 @@ interface FounderProps {
   role?: string;
   designation?: string;
   bio?: string[];
+  coFounderName?: string;
+  coFounderRole?: string;
+  coFounderBio?: string[];
   photo?: unknown;
   instagramUrl?: string;
   linkedinUrl?: string;
 }
 
-export default function FounderSection({ name, role, designation, bio, photo, instagramUrl, linkedinUrl }: FounderProps) {
+export default function FounderSection({ 
+  name, role, designation, bio, 
+  coFounderName, coFounderRole, coFounderBio, 
+  photo, instagramUrl, linkedinUrl 
+}: FounderProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -39,50 +46,38 @@ export default function FounderSection({ name, role, designation, bio, photo, in
     return () => ctx.revert();
   }, []);
 
-  const defaultBio = [
-    "Driven by a passion for CGI, VFX, and cinematic storytelling, our leadership built this studio with a vision to create world-class advertising visuals that leave a lasting impact. By blending creativity, realism, and innovation, we focus on crafting high-end visual experiences that help brands stand out in today's fast-moving digital world.",
-    "Under their combined direction, the studio continues to push the boundaries of modern advertising through visually striking and emotionally engaging content.",
+  const defaultBio1 = [
+    "Driven by a passion for CGI, VFX, and cinematic storytelling, our CEO built this studio with a vision to create world-class advertising visuals that leave a lasting impact.",
+  ];
+  
+  const defaultBio2 = [
+    "Under their combined direction, the studio continues to push the boundaries of modern advertising through visually striking and emotionally engaging content. Our CTO ensures cutting-edge technology drives our pipelines.",
   ];
 
-  const displayBio = bio && bio.length > 0 ? bio : defaultBio;
+  const displayBio1 = bio && bio.length > 0 ? bio : defaultBio1;
+  const displayBio2 = coFounderBio && coFounderBio.length > 0 ? coFounderBio : defaultBio2;
 
   const photoSrc = photo
     ? urlFor(photo).width(800).height(1000).url()
     : "/CEO Founder.avif";
-  const photoSrc2 = "/CEO Founder.avif"; // Using same fallback image until a second one is provided
 
   return (
     <section ref={ref} className="py-24 md:py-32 bg-brand-dark overflow-hidden">
       <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
         
-        {/* Left Visual Panel: 2 Staggered Images */}
-        <div className="founder-animate lg:w-5/12 w-full flex justify-center gap-4 sm:gap-6 relative">
+        {/* Left Visual Panel: 1 Single Large Image */}
+        <div className="founder-animate lg:w-5/12 w-full flex justify-center relative">
           
-          {/* CEO Image Card */}
-          <div className="w-1/2 relative aspect-[3/4] bg-black/50 overflow-hidden border border-white/[0.08] group transform -translate-y-6 sm:-translate-y-12">
+          <div className="w-full max-w-md relative aspect-[3/4] bg-black/50 overflow-hidden border border-white/[0.08] group">
             <div className="absolute inset-0 bg-brand-accent/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
             <img
               src={photoSrc}
-              alt="CEO"
+              alt="Founders"
               className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
             />
-            <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-              <div className="font-mono text-[10px] tracking-widest text-brand-accent uppercase mb-1">Chief Exec.</div>
-              <div className="font-heading font-bold tracking-tight text-white text-xl">The CEO</div>
-            </div>
-          </div>
-
-          {/* Founder Image Card */}
-          <div className="w-1/2 relative aspect-[3/4] bg-black/50 overflow-hidden border border-white/[0.08] group transform translate-y-6 sm:translate-y-12">
-            <div className="absolute inset-0 bg-brand-accent/20 mix-blend-overlay z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
-            <img
-              src={photoSrc2}
-              alt="Founder"
-              className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
-            />
-            <div className="absolute bottom-0 left-0 w-full p-5 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
-              <div className="font-mono text-[10px] tracking-widest text-brand-accent uppercase mb-1">Visionary</div>
-              <div className="font-heading font-bold tracking-tight text-white text-xl">The Founder</div>
+            <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-20 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <div className="font-mono text-[10px] tracking-widest text-brand-accent uppercase mb-1">Founders</div>
+              <div className="font-heading font-bold tracking-tight text-white text-xl">The Leadership</div>
             </div>
           </div>
 
@@ -98,21 +93,45 @@ export default function FounderSection({ name, role, designation, bio, photo, in
             Leadership
           </div>
           
-          <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white mb-4">
+          <h2 className="font-heading font-medium tracking-tight text-[48px] md:text-[64px] leading-[1.1] text-white mb-10">
             The Minds Behind<br/>
             <span className="text-white/50 italic font-light">The Studio</span>
           </h2>
           
-          <div className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-brand-accent mb-10">
-            CEO & Founder
-          </div>
-          
-          <div className="flex flex-col gap-6 text-white/60 leading-[1.8] text-[15px] md:text-[16px] max-w-[65ch]">
-            {displayBio.map((para, i) => (
-              <p key={i}>
-                {para}
-              </p>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+            {/* CEO Intro */}
+            <div>
+              <div className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-brand-accent mb-2">
+                {role || "CEO & Founder"}
+              </div>
+              <div className="font-heading text-xl text-white mb-4">
+                {name || "The CEO"}
+              </div>
+              <div className="flex flex-col gap-4 text-white/60 leading-[1.8] text-[15px]">
+                {displayBio1.map((para, i) => (
+                  <p key={i}>
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </div>
+
+            {/* CTO Intro */}
+            <div>
+              <div className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase text-brand-accent mb-2">
+                {coFounderRole || "Co-Founder & CTO"}
+              </div>
+              <div className="font-heading text-xl text-white mb-4">
+                {coFounderName || "The CTO"}
+              </div>
+              <div className="flex flex-col gap-4 text-white/60 leading-[1.8] text-[15px]">
+                {displayBio2.map((para, i) => (
+                  <p key={i}>
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
           
           <div className="flex items-center gap-5 mt-12">
@@ -126,7 +145,6 @@ export default function FounderSection({ name, role, designation, bio, photo, in
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               </a>
             )}
-            {/* Fallback empty links so layout holds up */}
             {!instagramUrl && !linkedinUrl && (
               <>
                 <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:text-brand-accent hover:border-brand-accent/50 transition-all duration-300" aria-label="Instagram">

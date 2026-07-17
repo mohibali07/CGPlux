@@ -61,6 +61,9 @@ export default async function Home() {
         role={founder?.role}
         designation={founder?.designation}
         bio={founder?.bio}
+        coFounderName={founder?.coFounderName}
+        coFounderRole={founder?.coFounderRole}
+        coFounderBio={founder?.coFounderBio}
         photo={founder?.photo}
         instagramUrl={founder?.instagramUrl}
         linkedinUrl={founder?.linkedinUrl}

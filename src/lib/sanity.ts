@@ -163,6 +163,9 @@ export async function getFounderProfile() {
     role,
     designation,
     bio,
+    coFounderName,
+    coFounderRole,
+    coFounderBio,
     photo,
     instagramUrl,
     linkedinUrl

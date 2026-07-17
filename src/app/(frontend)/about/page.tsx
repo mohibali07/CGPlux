@@ -45,6 +45,9 @@ export default async function AboutPage() {
         role={founder?.role}
         designation={founder?.designation}
         bio={founder?.bio}
+        coFounderName={founder?.coFounderName}
+        coFounderRole={founder?.coFounderRole}
+        coFounderBio={founder?.coFounderBio}
         photo={founder?.photo}
         instagramUrl={founder?.instagramUrl}
         linkedinUrl={founder?.linkedinUrl}
