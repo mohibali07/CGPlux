@@ -114,7 +114,7 @@ export default function Hero({
         
         {/* Main Title */}
         <h1 className="m-0 font-heading font-medium tracking-tight text-[14vw] sm:text-[11vw] lg:text-[120px] leading-[0.85] flex flex-col items-center">
-          <div className="hero-title-line overflow-hidden pb-2">
+          <div className="hero-title-line overflow-hidden pb-4">
             <span className="inline-block text-white drop-shadow-lg">
               {title.split(" ")[0]}
             </span>
