@@ -115,13 +115,19 @@ export default function Hero({
         {/* Main Title */}
         <h1 className="m-0 font-heading font-medium tracking-tight text-[14vw] sm:text-[11vw] lg:text-[120px] leading-[0.85] flex flex-col items-center">
           <div className="hero-title-line overflow-hidden pb-2">
-            <span className="inline-block text-white drop-shadow-lg">Crafting</span>
+            <span className="inline-block text-white drop-shadow-lg">
+              {title.split(" ")[0]}
+            </span>
           </div>
           <div className="hero-title-line overflow-hidden flex items-center justify-center pb-2">
-            <span className="inline-block text-outline italic pr-4 sm:pr-8">Digital</span>
+            <span className="inline-block text-outline italic pr-4 sm:pr-8">
+              {titleStroke}
+            </span>
           </div>
           <div className="hero-title-line overflow-hidden pb-2">
-            <span className="inline-block text-white font-bold drop-shadow-lg">Worlds.</span>
+            <span className="inline-block text-white font-bold drop-shadow-lg">
+              {title.split(" ").slice(1).join(" ") || "Worlds."}
+            </span>
           </div>
         </h1>
 
