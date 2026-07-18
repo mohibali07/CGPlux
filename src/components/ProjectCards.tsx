@@ -97,10 +97,9 @@ export default function ProjectCards({ projects }: ProjectCardsProps) {
 
       <div ref={cardsRef} className="w-full max-w-[1400px] mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project) => (
-          <Link
+          <div
             key={project._id}
-            href={`/projects/${project.slug.current}`}
-            className="project-card magnetic relative aspect-[3/4] rounded-xl border border-white/[0.08] bg-black overflow-hidden group opacity-0"
+            className="project-card magnetic relative aspect-[3/4] rounded-xl border border-white/[0.08] bg-black overflow-hidden group cursor-default opacity-0"
           >
             <div className="absolute inset-0 transition-transform duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05]">
               {project.image ? (
@@ -121,11 +120,6 @@ export default function ProjectCards({ projects }: ProjectCardsProps) {
             
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
             
-            {/* Minimal Arrow Icon on Hover */}
-            <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 backdrop-blur-md border border-white/20 text-white z-10">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </div>
-
             <div className="absolute left-0 right-0 bottom-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-[1s] ease-[cubic-bezier(0.25,1,0.5,1)] z-10">
               <h3 className="font-heading font-extrabold tracking-tighter text-2xl md:text-3xl text-white mb-3 group-hover:text-brand-accent transition-colors duration-500">
                 {project.title}
@@ -136,7 +130,7 @@ export default function ProjectCards({ projects }: ProjectCardsProps) {
                 </div>
               )}
             </div>
-          </Link>
+          </div>
         ))}
 
         {/* Fallback cards */}
@@ -153,11 +147,6 @@ export default function ProjectCards({ projects }: ProjectCardsProps) {
               
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-700" />
               
-              {/* Minimal Arrow Icon on Hover */}
-              <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 backdrop-blur-md border border-white/20 text-white z-10">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </div>
-
               <div className="absolute left-0 right-0 bottom-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-[1s] ease-[cubic-bezier(0.25,1,0.5,1)] z-10">
                 <h3 className="font-heading font-extrabold tracking-tighter text-2xl md:text-3xl text-white mb-3 group-hover:text-brand-accent transition-colors duration-500">
                   {item.title}

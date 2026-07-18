@@ -166,6 +166,39 @@ export default function SingleServiceClient({ service }: { service: any }) {
             )}
           </div>
           
+          {/* Child Services / Specific Offerings */}
+          {service.childServices && service.childServices.length > 0 && (
+            <div className="animate-element mt-16 pt-12 border-t border-white/10">
+              <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 mb-8 flex items-center gap-4">
+                <span className="w-8 h-[1px] bg-brand-accent"></span>
+                Specific Offerings
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {service.childServices.map((child: any, idx: number) => (
+                  <div key={idx} className="flex flex-col gap-4 group border border-white/5 bg-white/[0.02] p-6 hover:bg-white/[0.04] transition-colors rounded-xl">
+                    {child.image && (
+                      <div className="w-full aspect-[16/9] rounded-lg overflow-hidden bg-brand-dark/50 relative mb-2">
+                        <Image
+                          src={urlFor(child.image).width(600).height(400).url()}
+                          alt={child.title}
+                          fill
+                          className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    <div className="flex items-center gap-3">
+                       <span className="w-1.5 h-1.5 rounded-full bg-brand-accent/40 group-hover:bg-brand-accent transition-colors" />
+                       <h4 className="font-heading font-medium text-xl text-white group-hover:text-brand-accent transition-colors">{child.title}</h4>
+                    </div>
+                    {child.description && (
+                      <p className="text-white/50 text-sm leading-relaxed">{child.description}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="animate-element mt-16 pt-12 border-t border-white/10">
              <div className="font-heading text-2xl text-white mb-6">Let&apos;s build something extraordinary together.</div>
              <Link

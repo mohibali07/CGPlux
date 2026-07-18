@@ -31,6 +31,22 @@ export const service = defineType({
       description: "Rich text content for the single service page.",
     }),
     defineField({
+      name: "childServices",
+      title: "Specific Offerings / Child Services",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "title", title: "Title", type: "string" },
+            { name: "description", title: "Description", type: "text" },
+            { name: "image", title: "Image", type: "image", options: { hotspot: true } },
+          ],
+        },
+      ],
+      description: "List of sub-services or specific features offered within this main service.",
+    }),
+    defineField({
       name: "tags",
       title: "Tags",
       type: "array",

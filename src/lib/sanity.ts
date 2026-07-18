@@ -61,7 +61,12 @@ export async function getServiceBySlug(slug: string) {
       description,
       content,
       tags,
-      image
+      image,
+      childServices[] {
+        title,
+        description,
+        image
+      }
     }`,
     { slug }
   );
