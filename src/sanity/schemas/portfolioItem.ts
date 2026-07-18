@@ -28,16 +28,7 @@ export const portfolioItem = defineType({
       name: "category",
       title: "Category",
       type: "string",
-      options: {
-        list: [
-          { title: "3D Animation", value: "3d-animation" },
-          { title: "3D Visualization", value: "3d-visualization" },
-          { title: "3D Architectural", value: "3d-architectural" },
-          { title: "CGI Advertisement", value: "cgi-advertisement" },
-          { title: "Motion Graphics", value: "motion-graphics" },
-          { title: "Visual Effects", value: "visual-effects" },
-        ],
-      },
+      description: "Type the category name (e.g., 3D Animation, Web Development). Exact spelling groups items together.",
     }),
     defineField({
       name: "excerpt",

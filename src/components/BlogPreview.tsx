@@ -20,29 +20,7 @@ interface BlogPreviewProps {
   posts?: BlogPost[];
 }
 
-const fallbackPosts: BlogPost[] = [
-  {
-    _id: "b1",
-    title: "Asia's First All-White RTX 5090 CG Workstation",
-    category: "Blog",
-    excerpt: "Building the ultimate CG workstation for cinematic production and 3D rendering.",
-    publishedAt: "2025-05-28",
-  },
-  {
-    _id: "b2",
-    title: "The Future of CGI in Advertising",
-    category: "Blog",
-    excerpt: "How cinematic CGI is reshaping modern brand storytelling and visual marketing.",
-    publishedAt: "2025-04-12",
-  },
-  {
-    _id: "b3",
-    title: "Inside Our Creative Pipeline",
-    category: "News",
-    excerpt: "A look at the tools and workflows behind our latest productions.",
-    publishedAt: "2025-03-05",
-  },
-];
+
 
 function formatDate(dateStr?: string) {
   if (!dateStr) return "";
@@ -57,6 +35,8 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    if (!ref.current) return;
+    
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".blog-card",
@@ -78,7 +58,11 @@ export default function BlogPreview({ posts }: BlogPreviewProps) {
     return () => ctx.revert();
   }, []);
 
-  const displayPosts = posts && posts.length > 0 ? posts.slice(0, 3) : fallbackPosts;
+  if (!posts || posts.length === 0) {
+    return null;
+  }
+
+  const displayPosts = posts.slice(0, 3);
 
   return (
     <section ref={ref} className="py-24 md:py-32 bg-brand-dark">

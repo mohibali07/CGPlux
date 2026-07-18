@@ -139,7 +139,7 @@ export default function Hero({
         {/* CTA Buttons */}
         <div className="flex items-center justify-center gap-4 sm:gap-6">
           <Link
-            href="/projects"
+            href="/portfolio"
             className="hero-button group relative inline-flex items-center justify-center h-[54px] px-8 sm:px-10 rounded-full font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] bg-white overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(56,199,192,0.3)] transition-shadow duration-500"
           >
             <div className="absolute inset-0 bg-brand-accent transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out" />

@@ -19,23 +19,54 @@ interface PortfolioGridProps {
   items: PortfolioItem[];
 }
 
-const categories = [
-  { label: "All", value: "" },
-  { label: "3D Animation", value: "3d-animation" },
-  { label: "3D Visualization", value: "3d-visualization" },
-  { label: "3D Architectural", value: "3d-architectural" },
-  { label: "CGI Advertisement", value: "cgi-advertisement" },
-  { label: "Motion Graphics", value: "motion-graphics" },
-];
+const formatCategoryLabel = (val: string) => {
+  return val
+    .split("-")
+    .map((word) => {
+      if (word.toLowerCase() === "3d") return "3D";
+      if (word.toLowerCase() === "cgi") return "CGI";
+      if (word.toLowerCase() === "ui") return "UI";
+      if (word.toLowerCase() === "ux") return "UX";
+      if (word.toLowerCase() === "tv") return "TV";
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+};
 
 export default function PortfolioGrid({ items }: PortfolioGridProps) {
   const [activeFilter, setActiveFilter] = useState("");
   const gridRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
 
-  const filtered = activeFilter
-    ? items.filter((item) => item.category === activeFilter)
-    : items;
+  const fallback = [
+    { title: "Dream Glaze CGI Animation", category: "3d-animation" },
+    { title: "Valentino Uomo Perfume 3D", category: "3d-animation" },
+    { title: "3D Visualization For Baaroq", category: "3d-visualization" },
+    { title: "Ultra Realistic 3D Product Rendering", category: "3d-visualization" },
+    { title: "Rolex Submarine Watch 3D", category: "3d-animation" },
+    { title: "3D Animation Of Shoes", category: "3d-animation" },
+  ];
+
+  const actualItems: PortfolioItem[] = items.length > 0 ? items : fallback.map((f, i) => ({ 
+    _id: String(i), 
+    title: f.title, 
+    slug: { current: f.title.toLowerCase().replace(/\s+/g, "-") }, 
+    category: f.category,
+    image: null
+  }));
+
+  const uniqueCategoryValues = Array.from(new Set(actualItems.map((item) => item.category).filter(Boolean))) as string[];
+  const dynamicCategories = [
+    { label: "All", value: "" },
+    ...uniqueCategoryValues.map(val => ({
+      label: formatCategoryLabel(val),
+      value: val
+    }))
+  ];
+
+  const displayItems = activeFilter
+    ? actualItems.filter((item) => item.category === activeFilter)
+    : actualItems;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -72,20 +103,6 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
     }
   }, [activeFilter]);
 
-  const fallback = [
-    { title: "Dream Glaze CGI Animation", category: "3d-animation" },
-    { title: "Valentino Uomo Perfume 3D", category: "3d-animation" },
-    { title: "3D Visualization For Baaroq", category: "3d-visualization" },
-    { title: "Ultra Realistic 3D Product Rendering", category: "3d-visualization" },
-    { title: "Rolex Submarine Watch 3D", category: "3d-animation" },
-    { title: "3D Animation Of Shoes", category: "3d-animation" },
-  ];
-
-  const displayItems: PortfolioItem[] = items.length > 0
-    ? filtered
-    : fallback
-        .filter((f) => !activeFilter || f.category === activeFilter)
-        .map((f, i) => ({ _id: String(i), title: f.title, slug: { current: f.title.toLowerCase().replace(/\s+/g, "-") }, category: f.category }));
 
   return (
     <>
@@ -101,7 +118,7 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
 
         {/* Category filters */}
         <div className="flex flex-wrap gap-2 mb-10 opacity-0">
-          {categories.map((cat) => (
+          {dynamicCategories.map((cat) => (
             <button
               key={cat.value}
               onClick={() => setActiveFilter(cat.value)}
@@ -122,7 +139,7 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
       </div>
 
       <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {displayItems.map((item) => (
+        {displayItems.map((item, index) => (
           <div
             key={item._id}
             className="portfolio-card opacity-0 project-card magnetic relative aspect-[3/4] rounded-xl border border-white/[0.08] bg-black overflow-hidden group cursor-default"
@@ -133,6 +150,7 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
                   src={urlFor(item.image).width(600).height(800).url()}
                   alt={item.title}
                   fill
+                  priority={index < 3}
                   sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-all duration-[1.5s] ease-[cubic-bezier(0.25,1,0.5,1)] filter grayscale-[0.8] brightness-[0.8] group-hover:grayscale-0 group-hover:brightness-100"
                 />
@@ -149,7 +167,7 @@ export default function PortfolioGrid({ items }: PortfolioGridProps) {
             <div className="absolute left-0 right-0 bottom-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-[1s] ease-[cubic-bezier(0.25,1,0.5,1)] z-10 pointer-events-none">
               {item.category && (
                 <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-brand-accent mb-3">
-                  {categories.find((c) => c.value === item.category)?.label || item.category}
+                  {dynamicCategories.find((c) => c.value === item.category)?.label || item.category}
                 </div>
               )}
               <h3 className="font-heading font-extrabold tracking-tighter text-2xl text-white mb-2 group-hover:text-brand-accent transition-colors duration-500">

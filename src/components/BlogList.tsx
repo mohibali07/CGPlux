@@ -42,19 +42,15 @@ export default function BlogList({ posts }: BlogListProps) {
     return () => ctx.revert();
   }, []);
 
-  const fallback = [
-    {
-      _id: "1",
-      title: "Asia's First Documented All-White RTX 5090 Build",
-      slug: { current: "asias-first-all-white-rtx-5090-build" },
-      excerpt: "The ultimate CG workstation by CGplux Studios - built for cinematic production and 3D rendering.",
-      category: "Blog",
-      publishedAt: "2025-05-28",
-      image: undefined,
-    },
-  ];
+  if (!posts || posts.length === 0) {
+    return (
+      <div className="text-center text-white/50 py-24 font-mono text-sm uppercase tracking-widest">
+        No blog posts yet.
+      </div>
+    );
+  }
 
-  const items = posts.length > 0 ? posts : fallback;
+  const items = posts;
 
   return (
     <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
