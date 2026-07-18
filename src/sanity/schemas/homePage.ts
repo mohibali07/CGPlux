@@ -22,8 +22,13 @@ export const homePage = defineType({
       type: "array",
       of: [{ type: "text" }],
     }),
-    defineField({ name: "aboutStat", title: "About Stat (e.g. 10+)", type: "string" }),
-    defineField({ name: "aboutStatLabel", title: "About Stat Label (e.g. Years)", type: "string" }),
+    defineField({
+      name: "coreFocusTags",
+      title: "Core Focus Tags",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Tags displayed under the About section (e.g. Cinematic CGI, Visual Effects).",
+    }),
 
     // Contact CTA
     defineField({ name: "ctaTitle", title: "CTA Title", type: "string" }),

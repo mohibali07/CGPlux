@@ -7,14 +7,12 @@ interface AboutProps {
   eyebrow?: string;
   title?: string;
   paragraphs?: string[];
-  stat?: string;
-  statLabel?: string;
+  coreFocusTags?: string[];
 }
 
-export default function AboutSection({ eyebrow, title, paragraphs, stat, statLabel }: AboutProps) {
+export default function AboutSection({ eyebrow, title, paragraphs, coreFocusTags }: AboutProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const statRef = useRef<HTMLDivElement>(null);
 
   const defaultParagraphs = [
     "is a Media production studio, specializing in cinematic CGI, visual effects, TV Commercials and high end digital content for modern brands.",
@@ -24,6 +22,9 @@ export default function AboutSection({ eyebrow, title, paragraphs, stat, statLab
   ];
 
   const displayParagraphs = paragraphs && paragraphs.length > 0 ? paragraphs : defaultParagraphs;
+  const displayTags = coreFocusTags && coreFocusTags.length > 0 
+    ? coreFocusTags 
+    : ["Cinematic CGI", "Visual Effects", "TV Commercials", "3D Animation"];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -89,7 +90,7 @@ export default function AboutSection({ eyebrow, title, paragraphs, stat, statLab
               <div className="about-paragraph mt-8 pt-8 border-t border-white/10">
                 <div className="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-2">Our Core Focus</div>
                 <div className="flex flex-wrap gap-3 mt-6">
-                  {["Cinematic CGI", "Visual Effects", "TV Commercials", "3D Animation"].map((tag) => (
+                  {displayTags.map((tag) => (
                     <span key={tag} className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-mono uppercase tracking-widest text-white/70">
                       {tag}
                     </span>

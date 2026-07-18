@@ -49,8 +49,7 @@ export default async function Home() {
         eyebrow={homePage?.aboutEyebrow}
         title={homePage?.aboutTitle}
         paragraphs={homePage?.aboutParagraphs}
-        stat={homePage?.aboutStat}
-        statLabel={homePage?.aboutStatLabel}
+        coreFocusTags={homePage?.coreFocusTags}
       />
       <ClientsSection clients={clients} partners={partners} />
       <ProjectCards projects={projects} />
