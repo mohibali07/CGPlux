@@ -1,11 +1,11 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
+import { createImageUrlBuilder } from "@sanity/image-url";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type SanityImageSource = any;
 
 let _client: SanityClient | null = null;
-let _builder: ReturnType<typeof imageUrlBuilder> | null = null;
+let _builder: ReturnType<typeof createImageUrlBuilder> | null = null;
 
 function getClient(): SanityClient {
   if (!_client) {
@@ -21,7 +21,7 @@ function getClient(): SanityClient {
 
 function getBuilder() {
   if (!_builder) {
-    _builder = imageUrlBuilder(getClient());
+    _builder = createImageUrlBuilder(getClient());
   }
   return _builder;
 }

@@ -109,7 +109,7 @@ export default function Header() {
       </header>
 
       {/* Mobile menu */}
-      <div className={`fixed inset-0 z-40 glass-panel flex flex-col items-center justify-center gap-6 transition-all duration-500 md:hidden ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+      <div className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 transition-all duration-500 md:hidden ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
           return (
