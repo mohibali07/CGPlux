@@ -36,5 +36,10 @@ jobs:
             npm install
             npm run build
 
-            # PM2 process ko restart karein
-            pm2 restart cgplux-frontend || pm2 start npm --name "cgplux-frontend" -- start -- -p 3000
+            # PM2 process aur port conflicts resolve karein
+            pm2 delete cgplux-frontend || true
+            npx kill-port 3000 || true
+
+            # Next.js server ko directly PM2 se start karein (npm ke baghair taake orphan process na bane)
+            pm2 start node_modules/next/dist/bin/next --name "cgplux-frontend" -- start -p 3000
+            pm2 save
