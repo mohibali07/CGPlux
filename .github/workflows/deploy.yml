@@ -21,15 +21,17 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 11092
           script: |
+            set -e
             # Project directory me jayein
             cd /www/wwwroot/cgpluxstudios.com
 
-            # Naya code pull karein
+            # Local changes (jese package-lock.json) ko discard karein taake pull fail na ho
+            git reset --hard
             git pull origin main
 
             # Node modules install karein aur production build banayein
             npm install
             npm run build
 
-            # PM2 process ko zero-downtime ke sath reload karein
-            pm2 reload cgplux-frontend || pm2 start npm --name "cgplux-frontend" -- start -- -p 3000
+            # PM2 process ko restart karein
+            pm2 restart cgplux-frontend || pm2 start npm --name "cgplux-frontend" -- start -- -p 3000
