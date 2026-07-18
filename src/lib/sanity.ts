@@ -30,16 +30,6 @@ export function urlFor(source: SanityImageSource) {
   return getBuilder().image(source);
 }
 
-export async function getProjects() {
-  return getClient().fetch(`*[_type == "project"] | order(order asc) {
-    _id,
-    title,
-    slug,
-    image,
-    categories,
-    excerpt
-  }`);
-}
 
 export async function getServices() {
   return getClient().fetch(`*[_type == "service"] | order(order asc) {
