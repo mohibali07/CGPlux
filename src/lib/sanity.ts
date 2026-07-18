@@ -85,6 +85,8 @@ export async function getTestimonials() {
 export async function getSiteSettings() {
   return getClient().fetch(`*[_type == "siteSettings"][0] {
     title,
+    logo,
+    favicon,
     activeClients,
     pipeline,
     nextUpdate,

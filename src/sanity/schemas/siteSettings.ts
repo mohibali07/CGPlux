@@ -7,6 +7,8 @@ export const siteSettings = defineType({
   fields: [
     // ─── General ──────────────────────────────────────────────
     defineField({ name: "title", title: "Site Title", type: "string" }),
+    defineField({ name: "logo", title: "Website Logo", type: "image", options: { hotspot: true } }),
+    defineField({ name: "favicon", title: "Favicon", type: "image", options: { hotspot: true } }),
     
     // ─── Global Dashboard/Stats ───────────────────────────────
     defineField({ name: "activeClients", title: "Active Clients (Global KPI)", type: "string" }),

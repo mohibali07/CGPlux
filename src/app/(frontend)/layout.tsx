@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LenisScroller from "@/components/LenisScroller";
-import { getSiteSettings } from "@/lib/sanity";
+import { getSiteSettings, urlFor } from "@/lib/sanity";
 import "../globals.css";
 
 const inter = Inter({
@@ -12,11 +12,16 @@ const inter = Inter({
   weight: ["300", "400", "700", "800"],
 });
 
-export const metadata: Metadata = {
-  title: "CGplux Studios",
-  description:
-    "Atmospheric, cinematic, and grid-aligned dark mode system for creative studios.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await getSiteSettings().catch(() => null);
+  const faviconUrl = settings?.favicon ? urlFor(settings.favicon).width(32).height(32).url() : undefined;
+  
+  return {
+    title: settings?.title || "CGplux Studios",
+    description: "Atmospheric, cinematic, and grid-aligned dark mode system for creative studios.",
+    icons: faviconUrl ? { icon: faviconUrl } : undefined,
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -24,6 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const settings = await getSiteSettings().catch(() => null);
+  const logoUrl = settings?.logo ? urlFor(settings.logo).url() : undefined;
 
   return (
     <html lang="en" className={`${inter.variable} antialiased`}>
@@ -40,7 +46,7 @@ export default async function RootLayout({
         <LenisScroller />
         <div className="mx-auto w-full min-h-screen flex flex-col relative bg-brand-dark">
           <div className="bg-grid absolute inset-0 z-0 pointer-events-none" aria-hidden="true" />
-          <Header />
+          <Header logoUrl={logoUrl} />
           <main id="top" className="relative z-10 flex-1">
             {children}
           </main>

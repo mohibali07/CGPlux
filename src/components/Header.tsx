@@ -14,7 +14,7 @@ const navLinks = [
   { href: "/contact", label: "Contact", cta: true },
 ];
 
-export default function Header() {
+export default function Header({ logoUrl }: { logoUrl?: string }) {
   const pathname = usePathname();
   const headerRef = useRef<HTMLElement>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -69,7 +69,7 @@ export default function Header() {
           className="relative z-10 flex items-center gap-3 no-underline magnetic"
         >
           <span className="block w-[140px] h-auto transition-transform duration-300 hover:scale-105">
-            <img src="/LOGO.avif" alt="CGplux Studios" className="w-full h-auto object-contain" />
+            <img src={logoUrl || "/LOGO.avif"} alt="CGplux Studios" className="w-full h-auto object-contain" />
           </span>
         </Link>
 
