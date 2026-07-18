@@ -62,26 +62,44 @@ export default function AboutSection({ eyebrow, title, paragraphs, stat, statLab
     <section ref={sectionRef} id="about" className="py-32 md:py-48 relative overflow-hidden bg-brand-dark">
       <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
         
-        <div ref={textRef} className="w-full max-w-4xl">
-          <div className="about-header">
-            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 mb-6 flex items-center gap-4">
+        <div ref={textRef} className="w-full">
+          <div className="about-header mb-12 md:mb-16">
+            <div className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 flex items-center gap-4">
               <span className="w-8 h-[1px] bg-brand-accent"></span>
               {eyebrow || "About Us"}
             </div>
-            <h2 className="font-heading font-extrabold tracking-tighter text-[40px] md:text-[60px] leading-[1.1] mb-12 text-white">
-              {title || "CGplux Studios"}
-            </h2>
           </div>
-          
-          <div className="space-y-8">
-            {displayParagraphs.map((para, i) => (
-              <p key={i} className="about-paragraph text-white/70 text-lg md:text-xl xl:text-[22px] leading-[1.6] font-light">
-                {para}
-              </p>
-            ))}
+          <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 items-start">
+            
+            {/* Left Column: Big Headline */}
+            <div className="lg:w-5/12">
+              <h2 className="about-paragraph font-heading font-medium tracking-tight text-[32px] md:text-[42px] xl:text-[48px] leading-[1.2] text-white">
+                <span className="text-brand-accent">{title || "CGplux Studios"}</span> {displayParagraphs[0]}
+              </h2>
+            </div>
+            
+            {/* Right Column: Smaller Details */}
+            <div className="lg:w-7/12 flex flex-col gap-8 pt-2 lg:pt-4">
+              {displayParagraphs.slice(1).map((para, i) => (
+                <p key={i} className="about-paragraph text-white/60 text-base md:text-lg leading-[1.8] font-light max-w-[65ch]">
+                  {para}
+                </p>
+              ))}
+              
+              <div className="about-paragraph mt-8 pt-8 border-t border-white/10">
+                <div className="font-mono text-xs uppercase tracking-[0.2em] text-white/40 mb-2">Our Core Focus</div>
+                <div className="flex flex-wrap gap-3 mt-6">
+                  {["Cinematic CGI", "Visual Effects", "TV Commercials", "3D Animation"].map((tag) => (
+                    <span key={tag} className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-mono uppercase tracking-widest text-white/70">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
-        
       </div>
     </section>
   );
