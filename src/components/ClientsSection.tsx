@@ -41,9 +41,9 @@ export default function ClientsSection({ clients, partners }: ClientsSectionProp
       <div className="flex items-center justify-center w-[200px] md:w-[280px] h-[100px] px-8 transition-all duration-500 hover:scale-110 cursor-pointer group">
         {hasLogo ? (
           <img
-            src={urlFor(item.logo).width(300).height(150).url()}
+            src={urlFor(item.logo).url()}
             alt={item.name}
-            className="max-w-full max-h-full object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+            className="w-auto h-full max-h-[80px] max-w-full object-contain grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
           />
         ) : (
           <span className="font-heading text-xl md:text-2xl font-bold tracking-[0.2em] uppercase text-white/20 group-hover:text-brand-accent transition-colors duration-700 text-center">
