@@ -82,7 +82,7 @@ export default function AboutSection({ eyebrow, title, paragraphs, coreFocusTags
             {/* Right Column: Smaller Details */}
             <div className="lg:w-7/12 flex flex-col gap-8 pt-2 lg:pt-4">
               {displayParagraphs.slice(1).map((para, i) => (
-                <p key={i} className="about-paragraph text-white/60 text-base md:text-lg leading-[1.8] font-light max-w-[65ch]">
+                <p key={i} className="about-paragraph text-white/60 text-base md:text-lg leading-[1.8] font-light max-w-[65ch] whitespace-pre-wrap">
                   {para}
                 </p>
               ))}
