@@ -17,7 +17,8 @@ const fallbackServices = [
   { title: "3D Animation", slug: { current: "3d-animation" }, tags: ["3D Visualization", "Architectural", "CGI"], image: "/images/services/3d.png" },
 ];
 
-export default async function SingleServicePage({ params }: { params: { slug: string } }) {
+export default async function SingleServicePage(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   let service = await getServiceBySlug(params.slug).catch(() => null);
 
   // If not found in Sanity, check the local fallback array (useful before Sanity is fully populated)
