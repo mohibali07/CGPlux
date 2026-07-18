@@ -28,18 +28,19 @@ jobs:
             # Git dubious ownership error fix karein
             git config --global --add safe.directory /www/wwwroot/cgpluxstudios.com
 
-            # Local changes (jese package-lock.json) ko discard karein taake pull fail na ho
-            git reset --hard
-            git pull origin main
+            # Server ko latest GitHub commit ke sath force-sync karein
+            git fetch --all
+            git reset --hard origin/main
 
-            # Node modules install karein aur production build banayein
+            # Dependencies install karein
             npm install
+
+            # Purana build cache delete karein (Missing Manifest / 500 error fix karne ke liye)
+            rm -rf .next
+
+            # Production build banayein
             npm run build
 
-            # PM2 process aur port conflicts resolve karein
-            pm2 delete cgplux-frontend || true
-            npx kill-port 3000 || true
-
-            # Next.js server ko directly PM2 se start karein (npm ke baghair taake orphan process na bane)
-            pm2 start node_modules/next/dist/bin/next --name "cgplux-frontend" -- start -p 3000
+            # PM2 Process ko restart / recreate karein
+            pm2 restart cgplux-frontend || pm2 start node_modules/next/dist/bin/next --name "cgplux-frontend" -- start -p 3000
             pm2 save
