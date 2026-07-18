@@ -25,6 +25,9 @@ jobs:
             # Project directory me jayein
             cd /www/wwwroot/cgpluxstudios.com
 
+            # Git dubious ownership error fix karein
+            git config --global --add safe.directory /www/wwwroot/cgpluxstudios.com
+
             # Local changes (jese package-lock.json) ko discard karein taake pull fail na ho
             git reset --hard
             git pull origin main
