@@ -1,0 +1,35 @@
+name: Deploy Next.js App to VPS
+
+on:
+  push:
+    branches:
+      - main  # Agar aapki main branch ka naam 'master' ha, to yahan 'master' kar dein
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            # Project directory me jayein
+            cd /www/wwwroot/cgpluxstudios.com
+
+            # Naya code pull karein
+            git pull origin main
+
+            # Node modules install karein aur production build banayein
+            npm install
+            npm run build
+
+            # PM2 process ko zero-downtime ke sath reload karein
+            pm2 reload cgplux-frontend || pm2 start npm --name "cgplux-frontend" -- start -- -p 3000
