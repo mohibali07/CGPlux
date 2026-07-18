@@ -54,8 +54,7 @@ export default async function AboutPage() {
         eyebrow={homePage?.aboutEyebrow}
         title={homePage?.aboutTitle}
         paragraphs={homePage?.aboutParagraphs}
-        stat={homePage?.aboutStat}
-        statLabel={homePage?.aboutStatLabel}
+        coreFocusTags={homePage?.coreFocusTags}
       />
       <FounderSection
         sectionEyebrow={founder?.sectionEyebrow}
