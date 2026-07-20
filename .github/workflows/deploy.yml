@@ -1,18 +1,14 @@
-name: Deploy Next.js App to VPS
+name: Deploy to Server
 
 on:
   push:
     branches:
-      - main  # Agar aapki main branch ka naam 'master' ha, to yahan 'master' kar dein
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -20,27 +16,15 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 11092
+          command_timeout: 30m
           script: |
             set -e
-            # Project directory me jayein
             cd /www/wwwroot/cgpluxstudios.com
-
-            # Git dubious ownership error fix karein
             git config --global --add safe.directory /www/wwwroot/cgpluxstudios.com
-
-            # Server ko latest GitHub commit ke sath force-sync karein
             git fetch --all
             git reset --hard origin/main
-
-            # Dependencies install karein
             npm install
-
-            # Purana build cache delete karein (Missing Manifest / 500 error fix karne ke liye)
             rm -rf .next
-
-            # Production build banayein
             npm run build
-
-            # PM2 Process ko restart / recreate karein
-            pm2 restart cgplux-frontend || pm2 start node_modules/next/dist/bin/next --name "cgplux-frontend" -- start -p 3000
+            pm2 restart cgplux-frontend --update-env || pm2 start node_modules/next/dist/bin/next --name "cgplux-frontend" -- start -p 3000
             pm2 save
