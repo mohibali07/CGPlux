@@ -22,6 +22,7 @@ export const siteSettings = defineType({
 
     // ─── Social Links ─────────────────────────────────────────
     defineField({ name: "instagramUrl", title: "Instagram URL", type: "url" }),
+    defineField({ name: "facebookUrl", title: "Facebook URL", type: "url" }),
     defineField({ name: "behanceUrl", title: "Behance URL", type: "url" }),
     defineField({ name: "linkedinUrl", title: "LinkedIn URL", type: "url" }),
   ],

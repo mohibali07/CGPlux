@@ -84,6 +84,7 @@ export async function getSiteSettings() {
     contactEmail,
     contactAddress,
     instagramUrl,
+    facebookUrl,
     behanceUrl,
     linkedinUrl
   }`);

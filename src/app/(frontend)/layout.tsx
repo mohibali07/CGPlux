@@ -52,8 +52,12 @@ export default async function RootLayout({
           </main>
           <Footer
             instagramUrl={settings?.instagramUrl}
+            facebookUrl={settings?.facebookUrl}
             behanceUrl={settings?.behanceUrl}
             linkedinUrl={settings?.linkedinUrl}
+            contactPhone={settings?.contactPhone}
+            contactEmail={settings?.contactEmail}
+            contactAddress={settings?.contactAddress}
           />
         </div>
       </body>
